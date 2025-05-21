@@ -1,0 +1,53 @@
+.weekContainer {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+  flex: 1;
+  padding-top: 1rem;
+}
+
+.weekColor0 {
+  background-color: #e0f7fa;
+}
+
+.weekColor1 {
+  background-color: #fff9c4;
+}
+
+.weekColor2 {
+  background-color: #ffe0b2;
+}
+
+.weekColor3 {
+  background-color: #ede7f6;
+}
+
+
+.title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #2d3748;
+}
+
+.description {
+  background-color: #fefcbf;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.lesson {
+  background-color: #e6fffa;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.statistics {
+  background-color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 8px;
+}

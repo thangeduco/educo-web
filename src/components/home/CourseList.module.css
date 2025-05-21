@@ -1,0 +1,128 @@
+.columnsWrapper {
+  display: flex;
+  gap: 6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background-color: #f1f5f9; /* ✅ Màu xám dịu */
+  border-radius: 12px;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  
+}
+
+.row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.row:nth-child(3n + 1) {
+  margin-top: 3rem; /* ✅ Tăng giãn cách đầu khối mới */
+}
+
+
+.card {
+  flex: 1;
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  background: #fff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: scale(1.2); /* ✅ Phóng to 3% khi hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.cardSplit {
+  display: flex;
+  height: 100%;
+}
+
+.cardLeft {
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+  padding: 1rem;
+}
+
+.cardRight {
+  flex: 1;
+  padding: 1rem;
+  background-color: #f9f9f9;
+}
+
+.cardSubtype {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #dd6b20;
+  margin-bottom: 0.5rem;
+}
+
+
+.cardTitle {
+  margin-left: 0;
+  padding-left: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2196F3
+}
+
+/* Dải màu nền trái cho từng lớp cơ bản */
+.basicCard-0 .cardLeft { background-color: #FFD54F; } /* Toán 4 */
+.basicCard-1 .cardLeft { background-color: #FFB74D; } /* Toán 4 */
+.basicCard-2 .cardLeft { background-color: #FF8A65; } /* Toán 4 */
+
+.basicCard-3 .cardLeft { background-color: #F06292; } /* Toán 5 */
+.basicCard-4 .cardLeft { background-color: #BA68C8; } /* Toán 5 */
+.basicCard-5 .cardLeft { background-color: #64B5F6; } /* Toán 5 */
+
+.basicCard-6 .cardLeft { background-color: #FFD54F; } /* Toán 6 */
+.basicCard-7 .cardLeft { background-color: #FFB74D; } /* Toán 6 */
+.basicCard-8 .cardLeft { background-color: #FF8A65; } /* Toán 6 */
+
+.basicCard-9 .cardLeft { background-color: #F06292; } /* Toán 7 */
+.basicCard-10 .cardLeft { background-color: #BA68C8; } /* Toán 7 */
+.basicCard-11 .cardLeft { background-color: #64B5F6; } /* Toán 7 */
+
+.basicCard-12 .cardLeft { background-color: #FFD54F; } /* Toán 8 */
+.basicCard-13 .cardLeft { background-color: #FFB74D; } /* Toán 8 */
+.basicCard-14 .cardLeft { background-color: #FF8A65; } /* Toán 8 */
+
+.basicCard-15 .cardLeft { background-color: #F06292; } /* Toán 9 */
+.basicCard-16 .cardLeft { background-color: #BA68C8; } /* Toán 9 */
+.basicCard-17 .cardLeft { background-color: #64B5F6; } /* Toán 9 */
+
+
+/* Dải màu nền trái cho từng lớp bổ trợ */
+.advancedCard-0 .cardLeft { background-color: #AED581; }
+.advancedCard-1 .cardLeft { background-color: #81C784; }
+.advancedCard-2 .cardLeft { background-color: #4DB6AC; }
+.advancedCard-3 .cardLeft { background-color: #4FC3F7; }
+.advancedCard-4 .cardLeft { background-color: #9575CD; }
+.advancedCard-5 .cardLeft { background-color: #F48FB1; }
+
+.advancedCard-6 .cardLeft { background-color: #AED581; }
+.advancedCard-7 .cardLeft { background-color: #81C784; }
+.advancedCard-8 .cardLeft { background-color: #4DB6AC; }
+.advancedCard-9 .cardLeft { background-color: #4FC3F7; }
+.advancedCard-10 .cardLeft { background-color: #9575CD; }
+.advancedCard-11 .cardLeft { background-color: #F48FB1; }
+
+.advancedCard-12 .cardLeft { background-color: #AED581; }
+.advancedCard-13 .cardLeft { background-color: #81C784; }
+.advancedCard-14 .cardLeft { background-color: #4DB6AC; }
+.advancedCard-15 .cardLeft { background-color: #4FC3F7; }
+.advancedCard-16 .cardLeft { background-color: #9575CD; }
+.advancedCard-17 .cardLeft { background-color: #F48FB1; }

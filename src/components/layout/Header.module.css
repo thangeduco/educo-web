@@ -1,0 +1,136 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #e6fffa; /* ✅ xanh ngọc pastel dịu mắt */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  z-index: 1000;
+}
+  
+.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+  
+.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+  
+.leftSection {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding-left: 5rem;
+}
+
+.rightSection {
+  display: flex;
+  align-items: flex-start; /* ✅ Căn lên phía trên */
+  gap: 1.5rem;
+  margin-left: auto;
+  padding-top: 0;
+  margin-top: -0.5rem; /* ✅ Đẩy sát hơn lên trên */
+}
+  
+  .avatar {
+    width: 80px;         /* ✅ Thu nhỏ avatar */
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .slogan {
+    font-size: 1rem;
+    font-weight: 600;
+    font-style: italic;
+    color: #d97706; /* Cam rực rỡ, biểu tượng sự năng động, tích cực */
+    background: linear-gradient(90deg, #f97316, #c2410c); /* cam đậm hơn */
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: auto;         /* ✅ Đẩy slogan xuống dưới cùng khối .leftSection */
+    padding-bottom: 0.1rem;   /* (tuỳ chọn) điều chỉnh chính xác thêm */
+  }
+  
+  
+  .guideButton {
+    color: #3182ce;
+    font-weight: 500;
+    text-decoration: underline;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .guideButton:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+
+  
+  .authButtons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .login,
+.register {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease;
+}
+
+.login {
+  padding: 0.5rem 1rem;
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.login:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.register {
+  padding: 0.5rem 1rem;
+  background-color: #d97706; /* cam nổi bật */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+
+}
+
+.register:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+  .avatarSloganRow {
+    display: flex;
+    justify-content: space-between;  /* ✅ Dàn đều 2 bên */
+    align-items: flex-end;
+    width: 100%;
+    max-width: 1120px;               /* ✅ Căn giữa layout nhưng cho full chiều ngang */
+  }
+  
+  
