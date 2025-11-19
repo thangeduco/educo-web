@@ -1,0 +1,175 @@
+/* =========================
+   Layout tổng thể
+   ========================= */
+.video-inserted-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(10, 10, 10, 0.6);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal hiển thị nội dung video */
+.video-inserted-modal {
+  position: relative;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  max-width: 720px;
+  width: 90%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Văn bản giải thích */
+.video-inserted-text {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #333333;
+}
+
+/* Video player */
+.video-inserted-player {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================
+   Hiệu ứng animation kiểu overlay
+   ========================= */
+.video-inserted-wrapper.fade-in .video-inserted-modal {
+  animation: fadeIn 0.6s ease-in-out;
+}
+.video-inserted-wrapper.zoom-in .video-inserted-modal {
+  animation: zoomIn 0.5s ease-in-out;
+}
+.video-inserted-wrapper.slide-in .video-inserted-modal {
+  animation: slideIn 0.6s ease-out;
+}
+
+/* =========================
+   FeedbackAnimation Support
+   ========================= */
+.feedback-animation {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* bounce */
+.feedback-animation.bounce {
+  animation: bounceAnim 0.8s ease-in-out;
+}
+/* shake */
+.feedback-animation.shake {
+  animation: shakeAnim 0.5s ease-in-out;
+}
+/* fade-glow */
+.feedback-animation.fade-glow {
+  animation: fadeGlow 1s ease-in-out;
+  background: radial-gradient(circle, #fffaa0 0%, #fff200 80%);
+  padding: 20px;
+  border-radius: 50%;
+}
+/* zoom-in */
+.feedback-animation.zoom-in {
+  animation: zoomIn 0.6s ease-in-out;
+  color: #007bff;
+}
+/* framer pop / fade-in */
+.framer-style {
+  font-size: 48px;
+  color: gold;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.5);
+}
+
+/* =========================
+   Keyframes
+   ========================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceAnim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes shakeAnim {
+  0% {
+    transform: translate(-50%, -50%) translateX(0);
+  }
+  25% {
+    transform: translate(-50%, -50%) translateX(-10px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateX(10px);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateX(-10px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateX(0);
+  }
+}
+
+@keyframes fadeGlow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}

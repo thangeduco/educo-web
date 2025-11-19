@@ -1,0 +1,76 @@
+.weekList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.weekItem {
+  background-color: #f9f9f9;
+  border-left: 4px solid #2196f3;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.weekHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.weekTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  flex: 2;
+  color: #0d47a1;
+}
+
+.weekProgressTrack {
+  flex: 3;
+  height: 10px;
+  background-color: #e0f2f1;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.weekProgressFill {
+  height: 100%;
+  background-color: #26a69a;
+  transition: width 0.4s ease;
+}
+
+.weekScore {
+  flex: 1;
+  text-align: right;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.teacherComment {
+  font-size: 0.95rem;
+  color: #5d4037;
+  margin: 0.5rem 0 1rem;
+}
+
+.contentList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.contentItem {
+  font-size: 0.95rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.contentItem::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #2196f3;
+}

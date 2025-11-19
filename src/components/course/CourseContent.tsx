@@ -1,69 +1,95 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useUser } from '../../app/context/UserContext';
 import CourseHeader from './CourseHeader';
-import CourseWeek from './CourseWeek';
+import CourseWeek from './weeks/CourseWeek';
 import styles from './CourseContent.module.css';
+import {
+  WeekProgressDto,
+  WeeklyLearningStats,
+} from '../../services/dtos/student-course-detail.dto';
+import { getStudentCourseProgressDetail } from '../../services/learningService';
 
-interface Course {
-  id: number;
-  title: string;
-  description: string;
-}
+import socket from '../../services/socketClient';
 
-const CourseContent: React.FC<{ courseId: string }> = ({ courseId }) => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
+const CourseContent: React.FC = () => {
+  const { courseId } = useParams();
+  const { user } = useUser();
 
+  const [courseTitle, setCourseTitle] = useState<string>('');
+  const [badgeCount, setBadgeCount] = useState<number>(0);
+  const [courseProgress, setCourseProgress] = useState<number>(0);
+  const [weeksProgress, setWeeksProgress] = useState<WeekProgressDto[]>([]);
+  const [weekContent, setWeekContent] = useState<WeeklyLearningStats | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const [course, setCourse] = useState<Course | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const startDate = '11/05/2025';
-  const endDate = '11/12/2025';
-  const completedCount = 20;
-  const totalCount = 100;
-  const numOfWeek = 6;
-  const mockWeeks = [1, 2, 3];
+  const [triggerCelebration, setTriggerCelebration] = useState(false);
 
   useEffect(() => {
-    const fetchCourse = async () => {
+    const fetchCourseDetail = async () => {
+      if (!courseId) return;
+
       try {
-        const response = await fetch(`http://localhost:3100/courses/${courseId}`);
-        if (!response.ok) throw new Error('Không thể tải khóa học');
-        const data = await response.json();
-        setCourse(data);
-      } catch (err) {
-        setError((err as Error).message);
+        setLoading(true);
+
+        const studentId = user?.id ?? -1;
+        const result = await getStudentCourseProgressDetail(studentId, courseId);
+
+        console.log('[CourseContent] ✅ Kết quả từ backend:', result);
+        setCourseTitle(result.courseTitle);
+        setBadgeCount(result.courseBadgeCount ?? 0);
+        setCourseProgress(result.courseProgress ?? 0);
+        setWeeksProgress(result.weeksProgress);
+        setWeekContent(result.weekDetailContent);
+      } catch (error) {
+        console.error('[CourseContent] ❌ Lỗi khi lấy thông tin khoá học:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchCourse();
-  }, [courseId]);
+    fetchCourseDetail();
+  }, [user, courseId]);
 
-  if (loading) return <p>Đang tải khóa học...</p>;
-  if (error) return <p>Lỗi: {error}</p>;
-  if (!course) return <p>Không tìm thấy khóa học</p>;
+  // 🎯 Lắng nghe badge_awarded từ socket
+  useEffect(() => {
+    if (!user) return;
 
-  const title = `${course.title}`;
-  const description = `${course.description}`;
+    socket.emit('join_student_room', { studentId: user.id });
+
+    const handleBadgeAwarded = (data: any) => {
+      console.log('[Socket] 🎉 Nhận badge_awarded:', data);
+
+      setBadgeCount((prev) => prev + 1);
+      setTriggerCelebration(true);
+
+      setTimeout(() => setTriggerCelebration(false), 3500);
+    };
+
+    socket.on('badge_awarded', handleBadgeAwarded);
+
+    return () => {
+      socket.off('badge_awarded', handleBadgeAwarded);
+    };
+  }, [user]);
+
+  if (loading) return <div>Đang tải...</div>;
+  if (!weekContent) return <div>Không tìm thấy nội dung học.</div>;
 
   return (
     <div className={styles.wrapper}>
       <CourseHeader
-        courseTitle={title}
-        courseDescription = {description}
-        startDate={startDate}
-        endDate={endDate}
-        completedCount={completedCount}
-        totalCount={totalCount}
-        numOfWeek={numOfWeek}
+        courseTitle={courseTitle}
+        badgeCount={badgeCount}
+        courseProgress={courseProgress}
+        triggerCelebration={triggerCelebration}
       />
-      {mockWeeks.map((week) => (
-        <CourseWeek key={week} courseId={Number(courseId)} />
-      ))}
+      <CourseWeek
+        courseId={courseId!}
+        weekContent={weekContent}
+        weeksProgress={weeksProgress}
+        isGuest={!user}
+      />
     </div>
   );
 };

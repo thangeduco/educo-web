@@ -1,0 +1,16 @@
+/* src/pages/ParentDashboard.module.css */
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.headerSpacer {
+  height: 5rem; /* ✅ Spacer trùng với header height để tránh che nội dung */
+}
+
+.mainContent {
+  flex: 1;
+  background-color: #f1f5f9;
+  padding: 2rem 1rem;
+}

@@ -1,0 +1,15 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.headerSpacer {
+  height: 5rem; /* 👈 Cùng chiều cao với header cố định */
+}
+
+.mainContent {
+  flex: 1;
+  padding: 0 1rem;
+  /* ❌ Bỏ padding-top nếu đã dùng headerSpacer */
+}

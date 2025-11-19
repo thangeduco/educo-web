@@ -1,0 +1,335 @@
+/* ====== Overlay & Modal ====== */
+.video-choice-quiz-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.quiz-popup-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0d3b66; /* xanh đậm */
+}
+
+.quiz-modal {
+  position: relative;
+  background-color: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  max-width: 720px;
+  width: 90%;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+/* ====== Close Button ====== */
+.quiz-close-button {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 24px;
+  background: transparent;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+  z-index: 1;
+}
+.quiz-close-button:hover {
+  color: #333;
+}
+
+/* ====== Question Block ====== */
+.quiz-question-block {
+  margin-bottom: 20px;
+}
+.quiz-question {
+  font-size: 25px;
+  font-weight: 700;
+  color: #3c3a78; /* xanh navy nhẹ – phù hợp cho tiêu đề câu hỏi */
+  margin-top: -8px;        /* đẩy lên trên một chút */
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.question-feedback {
+  margin-top: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease-in-out;
+  display: block !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.correct-feedback {
+  background-color: #cde886;
+  border: 1px solid #a4d4b4;
+  /*In đậm giúp tôi*/
+  font-weight: bold;
+  color: #2b9a59;
+}
+.wrong-feedback {
+  background-color: #cde886;
+  border: 1px solid #f5c2c7;
+  color: #ee0b22;
+}
+
+/* ====== Choices ====== */
+.quiz-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 0 12px;
+}
+.quiz-choice {
+  padding: 14px 18px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.quiz-choice:hover {
+  border-color: #007bff;
+  background-color: #eaf4ff;
+}
+.quiz-choice.selected {
+  border-color: #007bff;
+  background-color: #d8eaff;
+  font-weight: bold;
+}
+.quiz-choice.correct-choice {
+  background-color: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+  font-weight: bold;
+}
+.quiz-choice.wrong-choice {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+  color: #721c24;
+  font-weight: bold;
+}
+.quiz-choice.missed-correct-choice {
+  background-color: #e6f9e6;
+  border-color: #28a745;
+  color: #155724;
+  font-style: italic;
+}
+.choice-text {
+  flex: 1;
+  text-align: left;
+}
+.choice-icon {
+  margin-left: 12px;
+  font-size: 20px;
+}
+
+/* ====== Submit Button ====== */
+.submit-button {
+  padding: 10px 24px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* ====== FeedbackAnimation.tsx Effects ====== */
+.feedback-animation {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* bounce */
+.feedback-animation.bounce {
+  animation: bounceAnim 0.8s ease-in-out;
+}
+/* shake */
+.feedback-animation.shake {
+  animation: shakeAnim 0.5s ease-in-out;
+}
+/* fade-glow */
+.feedback-animation.fade-glow {
+  animation: fadeGlow 1s ease-in-out;
+  background: radial-gradient(circle, #fffaa0 0%, #fff200 80%);
+  padding: 20px;
+  border-radius: 50%;
+}
+/* zoom-in */
+.feedback-animation.zoom-in {
+  animation: zoomIn 0.6s ease-in-out;
+  color: #007bff;
+}
+
+/* framer-style (used for framer-pop, framer-fade-in) */
+.framer-style {
+  font-size: 48px;
+  color: gold;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.5);
+}
+
+/* ====== Keyframes ====== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceAnim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes shakeAnim {
+  0% {
+    transform: translate(-50%, -50%) translateX(0);
+  }
+  25% {
+    transform: translate(-50%, -50%) translateX(-10px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateX(10px);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateX(-10px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateX(0);
+  }
+}
+
+@keyframes fadeGlow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.choice-explanation {
+  position: relative;
+  margin-top: 16px;
+  padding: 14px 18px 14px 54px; /* chừa thêm không gian bên trái cho icon lớn */
+  background: linear-gradient(to right, #fff3cd, #ffe8a1);
+  border-left: 6px solid #ffa000;
+  border-radius: 10px;
+  color: #6d1b7b;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.choice-explanation::before {
+  content: "👉"; /* hoặc "➔", "➡", "👉" */
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 50px;
+  color: #d32f2f; /* đỏ đậm, dễ nhìn */
+  font-weight: bold;
+  line-height: 1;
+}
+
+@keyframes zoomInExplanation {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.explanation-zoom-in {
+  animation: zoomInExplanation 1.5s ease-out;
+  transform-origin: top left; /* hoặc center nếu bạn muốn */
+}
+
+/* Vùng ảnh phụ hiển thị sau popup */
+.quiz-choice-image-wrapper {
+  position: relative;
+  margin-top: 12px;         /* tách nhẹ khỏi popup */
+  display: flex;
+  justify-content: center;
+  pointer-events: none;     /* tránh ảnh “ăn” click khi quiz đang mở */
+}
+
+.quiz-choice-image {
+  max-width: min(92vw, 560px);
+  max-height: 40vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  animation: qimg-fade-in 260ms ease-out;
+}
+
+@keyframes qimg-fade-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}

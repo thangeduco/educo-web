@@ -1,0 +1,15 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.headerSpacer {
+  height: 5rem; /* Chiều cao header để tránh nội dung bị che */
+}
+
+.mainContent {
+  flex: 1;
+  background-color: #f1f5f9;
+  padding: 2rem 1rem;
+}

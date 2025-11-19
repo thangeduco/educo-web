@@ -1,0 +1,285 @@
+/* ===== VARIABLES & RESET ===== */
+:root {
+  --header-height: 64px;
+  --primary-color: #0f4c81;       /* Brand Primary */
+  --accent-color: #dc2626;        /* Red/Accent */
+  --bg-light: #f5f7fb;
+  --text-dark: #1f2933;
+  --text-gray: #4b5563;
+  --radius-lg: 16px;
+}
+
+.pageContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-light);
+  color: var(--text-dark);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.mainContent {
+  flex: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: calc(var(--header-height) + 20px) 16px 40px;
+  box-sizing: border-box;
+}
+
+/* ===== SECTION WRAPPER & UTILITIES ===== */
+
+.section {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  box-sizing: border-box;
+}
+
+.sectionHeader {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sectionHeaderInline {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerIcon {
+  color: var(--accent-color);
+}
+
+.sectionSubHeader {
+  font-size: 0.95rem;
+  color: var(--text-gray);
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+
+.blockFull {
+  width: 100%;
+}
+
+.statusText,
+.errorText {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-gray);
+}
+
+.errorText {
+  color: var(--accent-color);
+}
+
+/* ===== Q&A SECTION ===== */
+
+.qaSection {
+  background-color: #f0f9ff;
+}
+
+/* ===== EVIDENCE / INTRO SECTION (Slides + text) ===== */
+
+.evidenceSection {
+  padding: 24px 0;
+  margin-bottom: 24px;
+}
+
+.introGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.introImageWrapper {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.introTextWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.introTitle {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.introDesc {
+  font-size: 1rem;
+  color: var(--text-gray);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.introStats {
+  display: flex;
+  gap: 30px;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.statItem strong {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  display: block;
+}
+
+.statItem span {
+  font-size: 0.9rem;
+  color: var(--text-gray);
+}
+
+.introHint {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 8px 0 0;
+}
+
+/* ===== PRODUCTS SECTION ===== */
+
+.tableResponsiveWrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobileHint {
+  display: none;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-gray);
+  font-style: italic;
+  margin-top: 12px;
+}
+
+/* ===== FOUNDER'S PHILOSOPHY ===== */
+
+.founderSection {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 60px 16px;
+  text-align: center;
+  margin-bottom: 0;
+  border-radius: var(--radius-lg);
+}
+
+.founderContent {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.quoteIcon {
+  color: var(--accent-color);
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+.founderPhilosophyTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.philosophyQuote {
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.8;
+  margin: 0 auto 30px;
+  font-family: 'Georgia', serif;
+  opacity: 0.96;
+}
+
+.founderName {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.founderTitle {
+  opacity: 0.85;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 960px) {
+  .introGrid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .introTextWrap {
+    order: 2;
+    align-items: center;
+  }
+
+  .introImageWrapper {
+    order: 1;
+  }
+
+  .sectionHeader {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .mainContent {
+    padding: calc(var(--header-height) + 16px) 12px 24px;
+  }
+
+  .section,
+  .evidenceSection {
+    padding: 16px 12px;
+  }
+
+  .introTitle {
+    font-size: 1.5rem;
+  }
+
+  .philosophyQuote {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .mobileHint {
+    display: block;
+  }
+
+  .introStats {
+    justify-content: space-around;
+    gap: 15px;
+  }
+
+  .statItem strong {
+    font-size: 1.2rem;
+  }
+
+  .statItem span {
+    font-size: 0.8rem;
+  }
+}

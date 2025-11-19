@@ -1,0 +1,36 @@
+.classDetail {
+  flex: 2;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+
+.table th,
+.table td {
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+}
+
+a {
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

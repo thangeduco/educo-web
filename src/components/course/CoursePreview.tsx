@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './CoursePreview.module.css';
+import { getCourseById } from '../../services/courseService';
+import { FeedbackAnimation } from '../animation/FeedbackAnimation';
 
 interface CoursePreviewProps {
   courseId: string;
@@ -12,14 +14,30 @@ interface Course {
   id: number;
   title: string;
   description: string;
-  roadmapImageUrl?: string; // nếu có ảnh lộ trình trong DB
+  roadmapImageUrl?: string;
 }
 
-const CoursePreview: React.FC<CoursePreviewProps> = ({ courseId}) => {
+const animationOptions = [
+  'confetti',
+  'bounce',
+  'shake',
+  'fade-glow',
+  'zoom-in',
+  'framer-pop',
+  'framer-fade-in'
+];
+
+const getRandomAnimation = (): string => {
+  const index = Math.floor(Math.random() * animationOptions.length);
+  return animationOptions[index];
+};
+
+const CoursePreview: React.FC<CoursePreviewProps> = ({ courseId }) => {
   const navigate = useNavigate();
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [animationType, setAnimationType] = useState<string | null>(null);
 
   const handleContinue = () => {
     navigate(`/courses/${courseId}`);
@@ -28,12 +46,9 @@ const CoursePreview: React.FC<CoursePreviewProps> = ({ courseId}) => {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        console.log('Prepare get data:');
-        const response = await fetch(`http://localhost:3100/courses/${courseId}`);
-        if (!response.ok) throw new Error('Không thể tải thông tin khóa học');
-        const data = await response.json();
-        console.log('Fetched course data:', data);
-        setCourse(data);
+        console.log('[CoursePreview] Chuẩn bị tải dữ liệu khoá học:', courseId);
+        const courseData = await getCourseById(courseId);
+        setCourse(courseData);
       } catch (err) {
         setError((err as Error).message);
       } finally {
@@ -42,6 +57,14 @@ const CoursePreview: React.FC<CoursePreviewProps> = ({ courseId}) => {
     };
 
     fetchCourse();
+
+    // 👇 Hiển thị hiệu ứng animation khi vào trang
+    const random = getRandomAnimation();
+    setAnimationType(random);
+
+    // ⏱️ Tắt animation sau 2.5 giây
+    const timer = setTimeout(() => setAnimationType(null), 2500);
+    return () => clearTimeout(timer);
   }, [courseId]);
 
   if (loading) return <p>Đang tải khóa học...</p>;
@@ -49,6 +72,9 @@ const CoursePreview: React.FC<CoursePreviewProps> = ({ courseId}) => {
 
   return (
     <div className={styles.container}>
+      {/* 🎉 Hiển thị animation */}
+      <FeedbackAnimation animationType={animationType} />
+
       <div className={styles.main}>
         <div className={styles.imageSection}>
           <img

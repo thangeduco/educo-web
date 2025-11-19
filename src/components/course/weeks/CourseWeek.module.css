@@ -1,0 +1,15 @@
+.courseWeeksLayout {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 9.5rem); /* Trừ header + courseHeader */
+  overflow: hidden;
+  gap: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .courseWeeksLayout {
+    flex-direction: column;
+    height: auto;
+  }
+}

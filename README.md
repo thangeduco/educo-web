@@ -44,3 +44,15 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+Kiến trúc 
+✔ Page = Presentation Layer
+UI, event, hiển thị.
+✔ Hook = Use Case / Logic Layer
+State, gọi API, xử lý dữ liệu.
+✔ API service = Data Layer
+Fetch dữ liệu thuần, không state.
+
+HomePage.tsx  →  useHomeUserGuide()  →  homePageParamsApi.ts
+UI               Logic / state         Gọi backend

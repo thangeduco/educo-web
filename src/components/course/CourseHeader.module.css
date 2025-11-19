@@ -1,66 +1,132 @@
 .courseHeader {
   position: sticky;
-  top: 4rem;
-  z-index: 900;
-  background-color: #ffcc80;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #e2e8f0;
+  top: 5rem;
+  z-index: 1000;
+  background: #fef08a; /* vàng nhạt nhẹ nhàng */
+  padding: 1rem 1.25rem;
+  border-bottom: 2px solid #e2e8f0;
+  min-height: 25px;
+  margin-bottom: 0;
+}
+
+/* Grid layout: 5 cột */
+.headerGrid {
+  display: grid;
+  grid-template-columns: 6fr 0.3fr 3fr 0.5fr 2fr;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+}
+
+.headerCol {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
-.left {
-  flex: 1;
-}
-
+/* Tiêu đề khoá học */
 .title {
   font-size: 1.25rem;
   font-weight: 700;
   color: #115293;
   margin: 0;
-  margin-top: 0;
 }
-.description {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1976D2;
+
+/* Thanh tiến độ */
+.courseProgressRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  position: relative;
+}
+
+.courseProgressTrack {
+  flex-grow: 1;
+  height: 20px;
+  background-color: #d1eaff;
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.courseProgressFill {
+  height: 100%;
+  background-color: #1a73e8;
+  border-radius: 14px 0 0 14px;
+  transition: width 0.4s ease-in-out;
+  box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.15), 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.courseProgressMarks {
+  position: absolute;
+  top: -1.75rem;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  padding: 0 0.25rem;
+}
+
+.courseProgressMarks span {
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.courseProgressIcon {
+  font-size: 2rem;
+  color: #666;
   margin: 0;
+  padding: 0;
+  line-height: 1;
 }
 
-.right {
-  text-align: left;
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #1976D2;
-  line-height: 1.3;        /* ✅ Giảm khoảng cách dòng */
-}
-.highlight {
-  color: #e53e3e; /* màu đỏ */
-  font-weight: 500;
+.rotatedRight {
+  transform: rotateY(180deg);
 }
 
-.right p {
-  margin: 0.25rem 0;       /* ✅ Giảm khoảng cách giữa các đoạn */
+/* Huy hiệu và thông tin */
+.courseStatItem {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: #333;
 }
 
-.infoTop {
-  margin: 0;
+.statIcon {
+  font-size: 1.1rem;
 }
 
-.infoBottom {
-  margin: 0.25rem 0 0;
-}
-
-.infoGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem 2rem;
-}
-
-.infoItem {
-  font-size: 1rem;
+.statLabel {
+  color: red;
   font-weight: 600;
-  color: #115293;
-  margin: 0;
+  font-size: 1rem;
+  margin-right: 0.25rem;
+}
+
+.statValue {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #1a73e8;
+  margin-left: 0.25rem;
+  background-color: #e8f0fe;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  display: inline-block;
+  min-width: 3rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  cursor: default;
+}
+
+.statValue:hover {
+  transform: scale(1.5);
+}
+
+/* Bổ sung padding nếu có header spacer */
+.headerWrapper {
+  margin-top: 0;
+  padding-top: 0;
 }

@@ -1,0 +1,200 @@
+/* ===== Overlay tổng ===== */
+.video-audio-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* ===== Modal ===== */
+.video-audio-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== Văn bản hiển thị ===== */
+.video-audio-text {
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px 32px;
+  border-radius: 12px;
+  text-align: center;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* ===== Hiệu ứng nền ánh sáng ===== */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 10px #ffffff33;
+  }
+  50% {
+    box-shadow: 0 0 30px #ffffffcc;
+  }
+  100% {
+    box-shadow: 0 0 10px #ffffff33;
+  }
+}
+
+/* ===== Overlay fade in ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== Hiệu ứng từ animation_type ===== */
+
+/* 1. fade-in */
+.video-audio-overlay.fade-in .video-audio-text {
+  animation: fadeText 1s ease-out forwards;
+}
+@keyframes fadeText {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 2. slide-in */
+.video-audio-overlay.slide-in .video-audio-modal {
+  animation: slideIn 0.6s ease-out forwards;
+}
+@keyframes slideIn {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 3. zoom-in */
+.video-audio-overlay.zoom-in .video-audio-modal {
+  animation: zoomIn 0.5s ease-out forwards;
+}
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 4. confetti (nền động nếu không dùng thư viện JS) */
+.video-audio-overlay.confetti::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets/images/confetti.gif');
+  background-size: cover;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ===== Các kiểu hiệu ứng phản hồi cho FeedbackAnimation ===== */
+.feedback-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* 5. bounce */
+.feedback-animation.bounce {
+  animation: bounceAnim 0.8s ease-in-out;
+}
+@keyframes bounceAnim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* 6. shake */
+.feedback-animation.shake {
+  animation: shakeAnim 0.5s ease-in-out;
+}
+@keyframes shakeAnim {
+  0% {
+    transform: translate(-50%, -50%) translateX(0);
+  }
+  25% {
+    transform: translate(-50%, -50%) translateX(-10px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateX(10px);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateX(-10px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateX(0);
+  }
+}
+
+/* 7. fade-glow */
+.feedback-animation.fade-glow {
+  animation: fadeGlow 1s ease-in-out;
+  background: radial-gradient(circle, #fffaa0 0%, #fff200 80%);
+  padding: 20px;
+  border-radius: 50%;
+}
+@keyframes fadeGlow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+/* 8. zoom-in */
+.feedback-animation.zoom-in {
+  animation: zoomIn 0.6s ease-in-out;
+  color: #007bff;
+}
+
+/* 9. Framer Motion bổ sung */
+.framer-style {
+  font-size: 48px;
+  color: gold;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.5);
+}

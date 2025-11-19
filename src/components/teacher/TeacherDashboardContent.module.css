@@ -1,0 +1,9 @@
+/* src/components/teacher/TeacherDashboardContent.module.css */
+.wrapper {
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 1rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem; /* ✅ Sát giữa header & content */
+}

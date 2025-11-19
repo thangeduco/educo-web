@@ -1,0 +1,124 @@
+.headerWrapper {
+  position: sticky;
+  top: 5rem;
+  z-index: 1000;
+  background: #fffde7; /* vàng nhạt */
+  padding: 1.2rem 1.5rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+/* Grid 2 cột: trái & phải thẳng hàng dọc */
+.headerGrid {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: start;
+  gap: 2rem;
+}
+
+/* Bên trái */
+.studentInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.studentName {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #0b5394;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.slogan {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: left;
+  max-width: 160px;
+}
+
+/* Bên phải: hiển thị theo cột, thẳng hàng với bên trái */
+.learningInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* Title */
+.title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0d47a1;
+}
+
+/* Progress */
+.progressWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.progressIcon {
+  font-size: 1.4rem;
+}
+
+.progressTrack {
+  flex-grow: 1;
+  height: 14px;
+  background-color: #dceefc;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #1976d2;
+  transition: width 0.4s ease-in-out;
+}
+
+.progressPercent {
+  font-weight: bold;
+  font-size: 0.95rem;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Badge */
+.badgeStat {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.badgeIcon {
+  font-size: 1.3rem;
+}
+
+.badgeLabel {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #c62828;
+}
+
+.badgeValue {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1a73e8;
+  background-color: #e3f2fd;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  min-width: 3rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,215 @@
+/* ------------------------------------ */
+/* Container cho player                 */
+/* ------------------------------------ */
+
+.video-lecture-container {
+  position: relative;
+  width: 60%;
+  max-width: 576px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  background-color: black;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.video-lecture-container video,
+.video-lecture-container iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ------------------------------------ */
+/* Thumbnail trước khi bấm xem video   */
+/* ------------------------------------ */
+
+.video-lecture-thumbnail {
+  position: relative;
+  width: 60%;
+  max-width: 576px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.video-lecture-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.3s;
+}
+
+.play-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* ------------------------------------ */
+/* Overlay backdrop cho mọi loại event */
+/* ------------------------------------ */
+
+.video-overlay-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* ------------------------------------ */
+/* Popup modal sử dụng chung           */
+/* ------------------------------------ */
+
+.video-popup-modal {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 640px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1000;
+}
+
+/* ------------------------------------ */
+/* Text động cho audio event           */
+/* ------------------------------------ */
+
+.video-overlay-text {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  margin-top: 20px;
+  animation: fadeInText 0.5s ease-in-out;
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------------------------ */
+/* Hiệu ứng confetti giả lập           */
+/* ------------------------------------ */
+
+.confetti-simulated {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: url('../../assets/images/confetti.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+  z-index: 998;
+  pointer-events: none;
+}
+
+/* ------------------------------------ */
+/* Popup hình ảnh                      */
+/* ------------------------------------ */
+
+.image-popup {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 90%;
+  max-height: 80%;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+.image-popup img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+}
+
+/* ------------------------------------ */
+/* Popup video phụ                     */
+/* ------------------------------------ */
+
+.video-popup-container {
+  background-color: #000;
+  padding: 16px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 720px;
+  max-height: 80vh;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* ------------------------------------ */
+/* Trạng thái video                    */
+/* ------------------------------------ */
+
+.video-status {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  padding: 0;
+  border-radius: 0;
+  line-height: 1.4;
+  position: relative;
+  background: none;
+  display: inline-block;
+}
+
+.video-status.not_started {
+  color: #666;
+}
+
+.video-status.in_progress {
+  color: #b35b00;
+}
+
+.video-status.done {
+  color: #2e7d32;
+}
+
+.video-lecture-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 8px;
+  gap: 6px;
+}
+
+.quiz-popup-modal {
+  position: relative;
+}

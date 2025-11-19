@@ -1,0 +1,406 @@
+/* ===== WRAPPER CHUNG CHO HOME_QAS ===== */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Tiêu đề */
+
+.sectionHeader {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #dc2626;
+  margin-bottom: 4px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 8px;
+  position: relative;
+}
+
+.sectionHeader::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 14px solid #dc2626;
+  margin-right: 10px;
+}
+
+/* Sub-header đồng cảm */
+
+.sectionSubHeader {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-top: 2px;
+  margin-left: 24px;
+  max-width: 680px;
+  line-height: 1.5;
+}
+
+/* ===== TRẠNG THÁI LOADING / ERROR ===== */
+
+.statusText {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.errorText {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #ef4444;
+}
+
+/* ===== LAYOUT CHUNG: LIST NHIỀU HÀNG, MỖI HÀNG 3 CỘT ===== */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* Có thể dùng lại header 3 cột nếu cần trong tương lai */
+
+.qaHeaderRow {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 1.6fr;
+  padding: 0 4px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+}
+
+.qaHeaderCol {
+  font-weight: 600;
+}
+
+/* Một hàng: câu hỏi + nút Có/Không + câu trả lời */
+
+.qaRow {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 1.6fr;
+  gap: 12px;
+  align-items: stretch;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.qaRowAnswered {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+}
+
+/* 3 ô trong một hàng */
+
+.leftPane,
+.centerPane,
+.rightPane {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 12px 14px;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.05);
+}
+
+/* Cột trái: câu hỏi */
+
+.leftPane {
+  position: relative;
+  overflow: hidden;
+}
+
+.leftPaneActive {
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  box-shadow: 0 10px 22px rgba(55, 65, 81, 0.08);
+}
+
+.leftPaneActive::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(129, 140, 248, 0.12), transparent 55%);
+  pointer-events: none;
+}
+
+/* ===== CỘT TRÁI: CÂU HỎI ===== */
+
+.questionRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.questionOrder {
+  font-weight: 600;
+  color: #6366f1;
+  margin-top: 1px;
+}
+
+.questionText {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* ===== CỘT GIỮA: CHỈ CÓ 2 NÚT CÓ / KHÔNG ===== */
+
+.centerPane {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionsRow {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+.answerButton {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 650;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.08);
+}
+
+/* Màu cơ bản của nút Có / Không (highlight nhẹ) */
+
+.answerButtonYes {
+  background: #e0f2fe;
+  color: #0f172a;
+}
+
+.answerButtonNo {
+  background: #fee2e2;
+  color: #0f172a;
+}
+
+/* Trạng thái đã chọn (Có / Không) – highlight rõ hơn */
+
+.answerButtonActiveYes {
+  background: #0ea5e9;
+  color: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
+  transform: translateY(-1px);
+}
+
+.answerButtonActiveNo {
+  background: #f97373;
+  color: #ffffff;
+  border-color: #ef4444;
+  box-shadow: 0 8px 20px rgba(248, 113, 113, 0.4);
+  transform: translateY(-1px);
+}
+
+.answerButton:hover {
+  transform: translateY(-1px);
+}
+
+/* ===== CỘT PHẢI: CÂU TRẢ LỜI ===== */
+
+.rightPane {
+  position: relative;
+}
+
+.answerCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeInUp 0.2s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.answerHeading {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Tag cảm xúc phía trên câu trả lời */
+
+.answerEmotionTag,
+.answerEmotionTagNeutral {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  border-radius: 999px;
+  padding: 4px 10px;
+  margin-bottom: 2px;
+}
+
+.answerEmotionTag {
+  background: rgba(248, 113, 113, 0.08);
+  color: #b91c1c;
+}
+
+.answerEmotionTagNeutral {
+  background: rgba(59, 130, 246, 0.08);
+  color: #1d4ed8;
+}
+
+.answerEmotionDot,
+.answerEmotionDotNeutral {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+}
+
+.answerEmotionDot {
+  background: #ef4444;
+}
+
+.answerEmotionDotNeutral {
+  background: #3b82f6;
+}
+
+.answerBody {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #1f2933;
+  white-space: pre-wrap;
+}
+
+/* Màu chữ theo lựa chọn Có / Không */
+
+.answerBodyYes {
+  color: #dc2626; /* đỏ */
+  font-weight: 600;
+}
+
+.answerBodyNo {
+  color: #2563eb; /* xanh dương */
+  font-weight: 600;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #4f46e5;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.ctaButton:hover {
+  opacity: 0.9;
+}
+
+.answerPlaceholder {
+  font-size: 0.86rem;
+  color: #64748b;
+}
+
+/* ===== SUMMARY BAR DƯỚI CÙNG – KHOẢNH KHẮC “À, Ồ EDUCO” ===== */
+
+.summaryBar {
+  margin-top: 20px;
+  padding: 12px 16px;
+  border-radius: 18px;
+  background: linear-gradient(90deg, #eef2ff, #e0f2fe);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.summaryBadge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(79, 70, 229, 0.08);
+  color: #3730a3;
+}
+
+.summaryText {
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+.summaryHighlight {
+  font-weight: 600;
+}
+
+/* ===== ROLE GREETING BÊN DƯỚI Q&A ===== */
+
+.roleWrapper {
+  margin-top: 20px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 960px) {
+  .qaHeaderRow {
+    display: none;
+  }
+
+  .qaRow {
+    grid-template-columns: 1fr;
+  }
+
+  .leftPane,
+  .centerPane,
+  .rightPane {
+    padding: 10px 12px;
+  }
+
+  .sectionSubHeader {
+    margin-left: 8px;
+    margin-right: 4px;
+  }
+
+  .summaryBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .sectionHeader {
+    font-size: 1rem;
+  }
+
+  .questionText {
+    font-size: 0.86rem;
+  }
+
+  .answerBody {
+    font-size: 0.86rem;
+  }
+
+  .sectionSubHeader {
+    font-size: 0.84rem;
+  }
+}

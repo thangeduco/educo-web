@@ -1,0 +1,10 @@
+.wrapper {
+  max-width: 95%;
+  margin: 0 auto;
+
+  /* ✅ KHÔNG cần padding-top vì đã có headerSpacer ở trang chính */
+  padding: 1rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem; /* ✅ Để header & content sát nhau */
+}

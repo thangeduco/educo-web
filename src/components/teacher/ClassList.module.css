@@ -1,0 +1,45 @@
+.classList {
+  flex: 1;
+  max-width: 300px;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.classItem {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed #d1d5db;
+}
+
+.className {
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  color: #2563eb;
+}
+
+.className:hover {
+  text-decoration: underline;
+}
+
+.classStats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.classStats span {
+  cursor: pointer;
+  color: #374151;
+}
+
+.classStats span:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}

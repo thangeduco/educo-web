@@ -1,0 +1,263 @@
+/* src/features/BM/components/BMHomeProductsTable.module.css */
+
+/* ===== LAYOUT CHIA 2 CỘT: KHỐI 1–6 & 7–12 ===== */
+
+.productsSplitLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.productsColumn {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.productsColumnHeader {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #111827;
+  padding-left: 4px;
+}
+
+/* ===== BẢNG SẢN PHẨM ===== */
+
+.productsTableWrap {
+  width: 100%;
+  overflow-x: auto;
+  padding-right: 16px; /* CHỪA KHOẢNG TRỐNG BÊN PHẢI CHO NÚT LUYỆN THI KHI PHÓNG TO */
+  box-sizing: border-box;
+}
+
+.productsTable {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 12px;
+  /* không dùng hidden để không cắt box-shadow / scale của nút */
+  overflow: visible;
+}
+
+/* Header nền dịu mắt */
+.productsTable thead {
+  background: linear-gradient(135deg, #f5fdfb, #eef2ff);
+}
+
+.productsTable th,
+.productsTable td {
+  padding: 6px 10px;
+  text-align: center;
+  white-space: nowrap;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Header lớn, đậm, xanh đậm */
+.productsTable thead th {
+  font-weight: 800;
+  color: blue;
+  font-size: 1.1rem;
+}
+
+.headerGradeCol {
+  min-width: 72px;
+}
+
+.headerLevelCol {
+  min-width: 140px;
+}
+
+.productsTable tbody tr:hover {
+  filter: brightness(0.97);
+}
+
+/* Text khi không có khóa cho range nào đó */
+.emptyRangeText {
+  font-size: 0.86rem;
+  color: #6b7280;
+  padding: 8px 4px;
+}
+
+/* ===== Ô vuông cột Khối ===== */
+
+.gradeCell {
+  text-align: center;
+}
+
+.gradeSquare {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #ffffff;
+  margin: 0 auto;
+  border: 1px solid transparent;
+}
+
+/* Cell trống */
+.emptyCell {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* ===== Pill Button (NÚT SẢN PHẨM) ===== */
+
+.productPill {
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background-color: #e5e7eb;
+  color: #111827;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.12s ease-out,
+    color 0.12s ease-out,
+    box-shadow 0.12s ease-out,
+    transform 0.12s ease-out,
+    filter 0.12s ease-out;
+}
+
+/* Hiệu ứng: khi hover thì nút phóng to rõ rệt nhưng vẫn trong vùng nhìn */
+.productPill:hover {
+  transform: scale(1.06);
+  filter: brightness(0.96);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+}
+
+/* Nút đang được chọn */
+.productPillActive {
+  box-shadow: 0 0 0 2px rgba(14, 116, 144, 0.45);
+  filter: brightness(0.92);
+}
+
+/* ===== 4 MÀU LUÂN PHIÊN: tím – xanh – xanh lá – cam ===== */
+
+.gradeColorDefault {
+  background-color: #6b7280;
+  border-color: #4b5563;
+  color: #ffffff;
+}
+
+/* Variant 1 — TÍM */
+.rowColorVariant1 {
+  background-color: #faf5ff;
+}
+
+.gradeColorVariant1 {
+  background-color: #cd7ff0;
+  border-color: #b05acc;
+  color: #ffffff;
+}
+
+/* Variant 2 — XANH DƯƠNG NHẠT */
+.rowColorVariant2 {
+  background-color: #f5fbff;
+}
+
+.gradeColorVariant2 {
+  background-color: #5ec7f9;
+  border-color: #3aaee4;
+  color: #ffffff;
+}
+
+/* Variant 3 — XANH LÁ NHẠT */
+.rowColorVariant3 {
+  background-color: #ebffe7;
+}
+
+.gradeColorVariant3 {
+  background-color: #85e475;
+  border-color: #5fc94c;
+  color: #ffffff;
+}
+
+/* Variant 4 — CAM */
+.rowColorVariant4 {
+  background-color: #fff7eb;
+}
+
+.gradeColorVariant4 {
+  background-color: #f3a136;
+  border-color: #d9861e;
+  color: #ffffff;
+}
+
+/* ===== PANEL THÔNG TIN (dùng ở màn khác nếu cần) ===== */
+
+.productInfoPanel {
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.productInfoPlaceholder {
+  font-size: 0.88rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.productInfoTitle {
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: #111827;
+}
+
+.productInfoMeta {
+  font-size: 0.88rem;
+  color: #4b5563;
+}
+
+.productInfoDescription {
+  margin-top: 6px;
+}
+
+.descriptionText {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #1f2937;
+  line-height: 1.55;
+}
+
+.productInfoPlaceholderText {
+  font-size: 0.86rem;
+  color: #6b7280;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 960px) {
+  .productsSplitLayout {
+    grid-template-columns: 1fr; /* màn hình nhỏ: 2 bảng xếp dọc */
+  }
+}
+
+@media (max-width: 640px) {
+  .productsTable th,
+  .productsTable td {
+    padding: 4px 8px;
+  }
+
+  .gradeSquare {
+    width: 32px;
+    height: 32px;
+    font-size: 0.82rem;
+  }
+
+  .productsTable thead th {
+    font-size: 0.9rem;
+  }
+}

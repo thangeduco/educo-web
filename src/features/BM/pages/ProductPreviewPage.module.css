@@ -1,0 +1,398 @@
+:root {
+  --header-height: 64px;
+  --bottom-bar-height: 80px;
+}
+
+/* ===== PAGE LAYOUT ===== */
+
+.pageContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f7fb;
+  color: #1f2933;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.mainContent {
+  flex: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: calc(var(--header-height) + 20px) 16px
+    calc(var(--bottom-bar-height) + 40px);
+  box-sizing: border-box;
+}
+
+/* ===== SECTION WRAPPER ===== */
+
+.section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px 20px 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  box-sizing: border-box;
+}
+
+/* HERO */
+
+.heroHeader {
+  margin-bottom: 18px;
+}
+
+.breadcrumb {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.breadcrumb span {
+  color: #111827;
+  font-weight: 600;
+}
+
+.sectionHeader {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #dc2626;
+  margin-bottom: 8px;
+}
+
+.heroSubtitle {
+  font-size: 1rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+.heroConcern {
+  font-size: 0.9rem;
+  color: #111827;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+/* META ROW */
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.metaItem {
+  font-size: 0.92rem;
+  color: #4b5563;
+}
+
+/* ===== PREVIEW GRID (4 BLOCK CHÍNH) ===== */
+
+.previewGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+  margin-bottom: 24px;
+}
+
+.previewItem {
+  background: #f9fafb;
+  border-radius: 16px;
+  padding: 14px 14px 16px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.previewTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 4px;
+}
+
+.previewText {
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.5;
+  margin: 0 0 6px;
+}
+
+/* ===== MEDIA BLOCKS – 16:9 ===== */
+
+.imageWrapper,
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f3f4f6;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  flex-shrink: 0;
+}
+
+.previewImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* VIDEO SECTION RIÊNG BÊN DƯỚI */
+
+.videoSection {
+  margin-top: 8px;
+}
+
+/* LINK HƯỚNG DẪN SỬ DỤNG */
+
+.usageLink {
+  margin-top: 4px;
+  font-size: 0.95rem;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.usageLink:hover {
+  text-decoration: underline;
+}
+
+/* ===== STORY SECTION – CÂU CHUYỆN THÀNH QUẢ ===== */
+
+.storySection {
+  margin-top: 24px;
+  padding: 18px 14px 12px;
+  border-radius: 16px;
+  background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+}
+
+.storySectionTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 6px;
+}
+
+.storySectionDesc {
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+/* Mỗi hàng gồm 2 học sinh (wrap trên mobile) */
+
+.storyRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.storyCard {
+  flex: 1 1 260px;
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 10px 12px;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+  box-sizing: border-box;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.storyCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+.storyAvatarWrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #e5e7eb;
+  border: 2px solid #fecaca;
+}
+
+.storyAvatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* BODY: TITLE + STORY */
+
+.storyBody {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.storyTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.storyText {
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ===== STICKY BOTTOM BAR ===== */
+
+.bottomBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--bottom-bar-height);
+  background: rgba(17, 24, 39, 0.94);
+  box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.2);
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottomBarInner {
+  width: 100%;
+  max-width: 1280px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.bottomBarText {
+  color: #f9fafb;
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+
+.bottomBarActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* CTA BUTTONS */
+
+.trialButton,
+.registerButton {
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.trialButton {
+  background: #fbbf24;
+  color: #111827;
+}
+
+.trialButton:hover {
+  background: #f59e0b;
+}
+
+.registerButton {
+  background: #dc2626;
+  color: #f9fafb;
+}
+
+.registerButton:hover {
+  background: #b91c1c;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 960px) {
+  .mainContent {
+    padding: calc(var(--header-height) + 16px) 12px
+      calc(var(--bottom-bar-height) + 32px);
+  }
+
+  .section {
+    padding: 16px 14px 22px;
+  }
+
+  .previewGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .bottomBarInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bottomBarText {
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .sectionHeader {
+    font-size: 1.25rem;
+  }
+
+  .previewTitle {
+    font-size: 1rem;
+  }
+
+  .storySection {
+    padding: 14px 10px;
+  }
+
+  .storyCard {
+    padding: 10px;
+  }
+
+  .bottomBarInner {
+    align-items: stretch;
+  }
+
+  .bottomBarActions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .trialButton,
+  .registerButton {
+    width: 100%;
+    text-align: center;
+  }
+}
