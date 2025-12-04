@@ -1,12 +1,11 @@
-// src/features/BM/pages/HomePage.tsx
-
-import React from 'react';
+// src/features/edu/pages/HomePage/HomePage.tsx
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../../app/context/UserContext';
 import Header from '../../../app/layout/Header';
 import Footer from '../../../app/layout/Footer';
 import styles from './HomePage.module.css';
-import { Quote, TrendingUp, CheckCircle2, Images } from 'lucide-react';
+import { Quote, TrendingUp, Images } from 'lucide-react';
 
 import HomeQAs from '../components/home/home_qas';
 import HomeImageSlides from '../components/home/home_image_slides';
@@ -17,19 +16,50 @@ import BMHomeProductsTable, {
 } from '../components/home/BMHomeProductsTable';
 
 import { useHomeQAs } from '../hooks/useHomeQAs';
-import { useHomeImageSlides } from '../hooks/useHomeImageSlides';
-import { useProductService } from '../hooks/useProductService';
-import type { BMProductDtoList } from '../model/BMProductDto';
+import { useHomeImageSlide } from '../hooks/useHomeImageSlide';
+import { useHomeCourses } from '../hooks/useHomeCourses';
+import { useHomeArchievement } from '../hooks/useHomeArchievement';
+
+import { HomePageCoursesDto } from '../model/home-page-param.dto';
+import ChatWidget from '../components/chat/ChatWidget';
+import LoginForm from '../components/users/LoginForm';
+import RegisterForm from '../components/users/RegisterForm';
 
 const HomePage: React.FC = () => {
   const { user } = useUser();
   const navigate = useNavigate();
   const role: UserRole = (user?.role as UserRole) || null;
 
-  // PHẦN 1 – Q&A (Trăn trở của phụ huynh)
+  // Popup đăng nhập
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  // Popup đăng ký
+  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
+
+  // Toast thông báo đăng ký thành công
+  const [showRegisterSuccessToast, setShowRegisterSuccessToast] =
+    useState(false);
+
+  const openLoginPopup = () => setIsLoginPopupOpen(true);
+  const closeLoginPopup = () => setIsLoginPopupOpen(false);
+
+  const openRegisterPopup = () => setIsRegisterPopupOpen(true);
+  const closeRegisterPopup = () => setIsRegisterPopupOpen(false);
+
+  const handleRegisterSuccess = () => {
+    // Đóng popup đăng ký
+    closeRegisterPopup();
+
+    // Bật toast thông báo đăng ký thành công + auto-login đã được xử lý trong registerUser
+    setShowRegisterSuccessToast(true);
+    setTimeout(() => {
+      setShowRegisterSuccessToast(false);
+    }, 4000);
+  };
+
+  // 1 – Q&A (Trăn trở của phụ huynh)
   const { qas, loading: qasLoading, error: qasError } = useHomeQAs();
 
-  // PHẦN 2 – Image Slides (Evidence: Educo đã đồng hành thế nào)
+  // 2 – Image Slides
   const {
     slides,
     loading: slidesLoading,
@@ -37,87 +67,65 @@ const HomePage: React.FC = () => {
     currentIndex,
     goToPrev,
     goToNext,
-  } = useHomeImageSlides();
+  } = useHomeImageSlide();
 
-  // Lấy meta text từ slide hiện tại (data-driven, fallback bằng text mặc định)
-  const currentSlide: any =
-    Array.isArray(slides) && slides.length > 0
-      ? (slides as any)[currentIndex] || (slides as any)[0]
-      : null;
-
-  const evidenceTitle: string =
-    currentSlide?.section_title ||
-    currentSlide?.headline ||
-    currentSlide?.title ||
-    'Educo đã đồng hành cùng các gia đình như thế nào?';
-
-  const evidenceSubtitle: string =
-    currentSlide?.section_subtitle ||
-    currentSlide?.description ||
-    currentSlide?.body ||
-    'Một vài hành trình thực tế mà Educo đã cùng con và bố mẹ đi qua – từ những nỗi lo ban đầu đến kết quả học tập rõ ràng.';
-
-  // Stats (nếu backend có stat_x_value / stat_x_label thì dùng, không thì fallback)
-  const stat1Value: string =
-    currentSlide?.stat_1_value || '95%';
-  const stat1Label: string =
-    currentSlide?.stat_1_label || 'Học sinh tiến bộ rõ rệt';
-
-  const stat2Value: string =
-    currentSlide?.stat_2_value || (slides?.length ? `${slides.length}+` : '300+');
-  const stat2Label: string =
-    currentSlide?.stat_2_label || 'Gia đình đã đồng hành cùng Educo';
-
-  const stat3Value: string =
-    currentSlide?.stat_3_value || '4.9/5';
-  const stat3Label: string =
-    currentSlide?.stat_3_label || 'Đánh giá tin tưởng từ phụ huynh';
-
-  // PHẦN 3 – Danh sách khoá học
+  // 2 – Thành tựu của Educo
   const {
-    products,
-    loading: productsLoading,
-    error: productsError,
-  } = useProductService();
+    achievement,
+    loading: achievementLoading,
+    error: achievementError,
+  } = useHomeArchievement();
 
-  const bmProductList: BMProductDtoList = Array.isArray(products)
-    ? products
-    : (products as any)?.data ?? [];
+  // 3 – Danh sách khoá học
+  const {
+    courses,
+    loading: coursesLoading,
+    error: coursesError,
+  } = useHomeCourses();
+
+  const homeCourseList: HomePageCoursesDto = Array.isArray(courses)
+    ? courses
+    : [];
 
   const handleProductSelect = (selected: SelectedProduct) => {
     const { product } = selected;
+    const courseCode = (product as any).courseCode;
 
-    if (!product.product_code) {
-      console.warn('[HomePage] product.product_code is missing', product);
+    if (!courseCode) {
+      console.warn(
+        '[HomePage] courseCode is missing on selected product',
+        product
+      );
       return;
     }
 
-    navigate(`/preview/products/${product.product_code}`, {
+    navigate(`/preview/products/${courseCode}`, {
       state: {
-        product: product,
+        product,
       },
     });
   };
 
-  const totalCourses = bmProductList?.length || 0;
-
   return (
     <div className={styles.pageContainer}>
-      <Header />
+      {/* Toast đăng ký thành công (hiện trên cùng, tự tắt) */}
+      {showRegisterSuccessToast && (
+        <div className={styles.toastContainer}>
+          <div className={styles.toastSuccess}>
+            🎉 Đăng ký thành công! Hệ thống đã tự động đăng nhập cho bạn.
+          </div>
+        </div>
+      )}
+
+      {/* Header nhận onLoginClick & onRegisterClick để mở popup */}
+      <Header
+        onLoginClick={openLoginPopup}
+        onRegisterClick={openRegisterPopup}
+      />
 
       <main className={styles.mainContent}>
-        {/* 1. PHỤ HUYNH BƯỚC VÀO VỚI TRĂN TRỞ + Q&A */}
+        {/* 1. Q&A */}
         <section className={`${styles.section} ${styles.qaSection}`}>
-          <div className={styles.sectionHeader}>
-            <CheckCircle2 size={20} className={styles.headerIcon} />
-            Thấu hiểu trăn trở của Ba Mẹ
-          </div>
-          <p className={styles.sectionSubHeader}>
-            Mỗi gia đình đều có một nỗi lo riêng: con học mãi không vào, sợ
-            Toán, mất gốc hay thiếu động lực... Hãy trả lời vài câu hỏi
-            <strong> Có / Không</strong> để Educo hiểu điều đang khiến bố mẹ đau đáu
-            nhất hiện tại.
-          </p>
           <div className={styles.blockFull}>
             <HomeQAs
               role={role}
@@ -128,7 +136,7 @@ const HomePage: React.FC = () => {
           </div>
         </section>
 
-        {/* 2. EVIDENCE: EDUCO ĐÃ ĐỒNG HÀNH NHƯ THẾ NÀO */}
+        {/* 2. EVIDENCE: TRÁI = THÀNH TỰU (2/5) – PHẢI = SLIDE (3/5) */}
         <section className={styles.evidenceSection}>
           <div className={styles.sectionHeaderInline}>
             <Images size={20} className={styles.headerIcon} />
@@ -136,6 +144,53 @@ const HomePage: React.FC = () => {
           </div>
 
           <div className={styles.introGrid}>
+            {/* Trái: Thành tựu của Educo (2/5) */}
+            <div className={styles.achievementWrapper}>
+              {achievementLoading && (
+                <div className={styles.statusText}>
+                  Đang tải thông tin thành tựu...
+                </div>
+              )}
+
+              {achievementError && !achievementLoading && (
+                <div className={styles.errorText}>
+                  Có lỗi khi tải thông tin thành tựu: {achievementError}
+                </div>
+              )}
+
+              {!achievementLoading && !achievementError && achievement && (
+                <div className={styles.achievementCard}>
+                  {achievement.intro && (
+                    <p className={styles.achievementIntro}>
+                      {achievement.intro}
+                    </p>
+                  )}
+
+                  {achievement.highlights &&
+                    achievement.highlights.length > 0 && (
+                      <ul className={styles.achievementList}>
+                        {achievement.highlights.map((item, idx) => (
+                          <li key={idx}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+
+                  {achievement.note && (
+                    <p className={styles.achievementNote}>
+                      {achievement.note}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {!achievementLoading && !achievementError && !achievement && (
+                <div className={styles.statusText}>
+                  Chưa có thông tin thành tựu để hiển thị.
+                </div>
+              )}
+            </div>
+
+            {/* Phải: Image Slides (3/5) */}
             <div className={styles.introImageWrapper}>
               <HomeImageSlides
                 slides={slides}
@@ -146,63 +201,37 @@ const HomePage: React.FC = () => {
                 goToNext={goToNext}
               />
             </div>
-
-            <div className={styles.introTextWrap}>
-              <h2 className={styles.introTitle}>{evidenceTitle}</h2>
-              <p className={styles.introDesc}>{evidenceSubtitle}</p>
-
-              <div className={styles.introStats}>
-                <div className={styles.statItem}>
-                  <strong>{stat1Value}</strong>
-                  <span>{stat1Label}</span>
-                </div>
-                <div className={styles.statItem}>
-                  <strong>{stat2Value}</strong>
-                  <span>{stat2Label}</span>
-                </div>
-                <div className={styles.statItem}>
-                  <strong>{stat3Value}</strong>
-                  <span>{stat3Label}</span>
-                </div>
-              </div>
-              <p className={styles.introHint}>
-                Mỗi slide là một câu chuyện thật: bắt đầu từ trăn trở của bố mẹ,
-                và kết thúc bằng sự thay đổi rõ rệt trong việc học của con.
-              </p>
-            </div>
           </div>
         </section>
 
         {/* 3. PRODUCTS – LỘ TRÌNH HỌC CỤ THỂ */}
-        <section className={styles.section}>
+        <section className={`${styles.section} ${styles.productsSection}`}>
           <div className={styles.sectionHeader}>
             <TrendingUp size={20} className={styles.headerIcon} />
-            Lựa chọn lộ trình học phù hợp nhất cho con
+            Lựa chọn khoá học phù hợp nhất cho con
           </div>
-          <p className={styles.sectionSubHeader}>
-            Dựa trên những trăn trở của bố mẹ, Educo thiết kế{' '}
-            <strong>{totalCourses}</strong> lộ trình học khác nhau để phù hợp
-            với từng điểm xuất phát và mục tiêu của con.
-          </p>
 
           <div className={styles.blockFull}>
-            {productsLoading && (
+            {coursesLoading && (
               <div className={styles.statusText}>
                 Đang tải danh sách khoá học...
               </div>
             )}
-            {productsError && !productsLoading && (
+            {coursesError && !coursesLoading && (
               <div className={styles.errorText}>
-                Có lỗi khi tải khoá học: {productsError}
+                Có lỗi khi tải khoá học: {coursesError}
               </div>
             )}
 
-            <div className={styles.tableResponsiveWrapper}>
-              <BMHomeProductsTable
-                products={bmProductList}
-                onProductSelect={handleProductSelect}
-              />
-            </div>
+            {!coursesLoading && !coursesError && (
+              <div className={styles.tableResponsiveWrapper}>
+                <BMHomeProductsTable
+                  products={homeCourseList}
+                  onProductSelect={handleProductSelect}
+                />
+              </div>
+            )}
+
             <div className={styles.mobileHint}>
               ← Vuốt ngang để xem thêm thông tin từng khoá →
             </div>
@@ -235,6 +264,58 @@ const HomePage: React.FC = () => {
         </section>
       </main>
 
+      {/* POPUP ĐĂNG NHẬP */}
+      {isLoginPopupOpen && (
+        <div className={styles.loginModalBackdrop}>
+          <div className={styles.loginModalContent}>
+            <div className={styles.loginModalHeader}>
+              <div className={styles.loginModalTitle}>Đăng nhập tài khoản</div>
+              <button
+                type="button"
+                className={styles.loginModalCloseButton}
+                onClick={closeLoginPopup}
+                aria-label="Đóng đăng nhập"
+              >
+                ×
+              </button>
+            </div>
+            <div className={styles.loginModalBody}>
+              <LoginForm
+                onLoginSuccess={() => {
+                  closeLoginPopup();
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* POPUP ĐĂNG KÝ */}
+      {isRegisterPopupOpen && (
+        <div className={styles.registerModalBackdrop}>
+          <div className={styles.registerModalContent}>
+            <div className={styles.registerModalHeader}>
+              <div className={styles.registerModalTitle}>Đăng ký tài khoản mới</div>
+              <button
+                type="button"
+                className={styles.registerModalCloseButton}
+                onClick={closeRegisterPopup}
+                aria-label="Đóng đăng ký"
+              >
+                ×
+              </button>
+            </div>
+            <div className={styles.registerModalBody}>
+              <RegisterForm
+                defaultRole="parent"
+                onRegisterSuccess={handleRegisterSuccess}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      <ChatWidget />
       <Footer />
     </div>
   );

@@ -95,13 +95,13 @@
 /* ===== RIGHT SECTION ===== */
 
 .rightSection {
-  margin-left: auto;         /* đẩy sang phải */
+  margin-left: auto; /* đẩy sang phải */
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1.2rem; /* giãn cách hơn giữa nút & info */
 
-  /* dịch sang phải thêm */
-  margin-right: 5.5rem;
+  /* dịch sang phải thêm để cách xa logout hơn */
+  margin-right: 10rem;
 }
 
 /* ===== AUTH BUTTONS ===== */
@@ -137,8 +137,9 @@
   color: #fff;
 }
 
+/* Nút đăng xuất: vàng đất */
 .logout {
-  background-color: #1e90ff;
+  background-color: #f59e0b; /* vàng đất */
   color: #fff;
 }
 
@@ -149,52 +150,61 @@
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== ROLE BADGES ===== */
+/* ===== USER INLINE BLOCK (avatar + tên + slogan ở giữa) ===== */
+
+.userInlineBlock {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.userText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* căn trái cho fullName & slogan */
+  text-align: left;
+}
+
+/* ===== ROLE BADGES + FULLNAME ===== */
+
+/* roleContainer & roleBox không dùng nữa,
+   nhưng giữ lại để không ảnh hưởng code khác nếu có. */
+.roleContainer {
+  display: none;
+}
 
 .roleBox {
-  font-size: 0.82rem;
-  font-weight: 600;
-  padding: 0.22rem 0.7rem;
-  border-radius: 9999px;
-  white-space: nowrap;
+  display: none;
 }
 
 .roleParent {
-  background-color: #eff6ff;
-  color: #2563eb;
+  display: none;
 }
 
 .roleTeacher {
-  background-color: #f3e8ff;
-  color: #9333ea;
+  display: none;
 }
 
 .roleStudent {
-  background-color: #dcfce7;
-  color: #16a34a;
+  display: none;
 }
 
-/* ===== USER AVATAR (RIGHTMOST) ===== */
-
-.userAvatarContainer {
-  position: absolute;
-
-  /* dịch sát phải hơn */
-  right: clamp(0.9rem, 2vw, 1.8rem);
-
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* fullName: đổi màu xanh nước biển đậm, giữ size */
+.fullName {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1d4ed8; /* xanh nước biển đậm */
+  white-space: nowrap;
 }
+
+/* ===== USER AVATAR (TRONG KHỐI Ở GIỮA) ===== */
 
 .userAvatarWrapper {
-  width: 38px;
-  height: 38px;
+  width: 52px;        /* to hơn */
+  height: 52px;
   border-radius: 50%;
   border: 2px solid #0d47a1;
-  padding: 1px;
+  padding: 2px;
   background-color: #ffffff;
 
   display: flex;
@@ -217,16 +227,32 @@
   object-fit: cover;
 }
 
+/* Slogan ngay dưới fullName, căn trái */
 .userSlogan {
-  margin-top: 2px;
-  font-size: 0.55rem;
+  margin-top: 5px;
+  font-size: 0.7rem;
   font-weight: 600;
-  color: #c2410c;
+  color: #e71001;
   font-style: italic;
-  text-align: center;
-  max-width: 180px;
-  word-break: break-word;
+  max-width: 220px;
   line-height: 1.2;
+  text-align: left;
+  word-break: break-word;
+}
+
+/* ===== USER AVATAR CONTAINER (GIỜ LÀ CHỖ NÚT ĐĂNG XUẤT) ===== */
+
+.userAvatarContainer {
+  position: absolute;
+
+  /* vẫn ở sát phải */
+  right: clamp(0.9rem, 2vw, 1.8rem);
+
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ===== AVATAR ZOOM MODAL ===== */
@@ -273,12 +299,17 @@
   }
 
   .rightSection {
-    margin-right: 4rem;
+    margin-right: 5rem; /* vẫn giữ khoảng cách tốt với nút logout */
+    gap: 0.9rem;
+  }
+
+  .fullName {
+    font-size: 0.8rem;
   }
 
   .userAvatarWrapper {
-    width: 34px;
-    height: 34px;
+    width: 44px;
+    height: 44px;
   }
 }
 
@@ -295,6 +326,12 @@
   }
 
   .userSlogan {
-    display: none; /* tránh vỡ layout */
+    display: none; /* tránh vỡ layout trên màn rất nhỏ */
+  }
+
+  .fullName {
+    max-width: 120px;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }

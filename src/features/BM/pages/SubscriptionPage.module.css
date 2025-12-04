@@ -1,0 +1,763 @@
+:root {
+  --header-height: 64px;
+}
+
+/* ===== PAGE LAYOUT ===== */
+
+.pageContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f7fb;
+  color: #1f2933;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.mainContent {
+  flex: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: calc(var(--header-height) + 20px) 16px 32px;
+  box-sizing: border-box;
+}
+
+/* ===== SECTION WRAPPER ===== */
+
+.section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  box-sizing: border-box;
+}
+
+/* HERO */
+
+.heroHeader {
+  margin-bottom: 12px;
+}
+
+.breadcrumb {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* META ROW (loading / error) */
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.metaItem {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.metaItemError {
+  font-size: 0.9rem;
+  color: #b91c1c;
+}
+
+/* FLOW LABEL */
+
+.stepFlow {
+  font-weight: 900;
+  font-size: 1.6rem;
+  color: #16a34a;
+  margin-left: 0;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(22, 163, 74, 0.12);
+  display: inline-block;
+  border-left: 4px solid #16a34a;
+  letter-spacing: 0.3px;
+}
+
+/* ===== VÙNG 1 – THÔNG TIN KHOÁ HỌC ===== */
+
+.courseInfoBlock {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  padding: 18px 18px 20px;
+  border-radius: 18px;
+  background: radial-gradient(
+    circle at top left,
+    #fee2e2 0,
+    #f9fafb 45%,
+    #eef2ff 100%
+  );
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  box-sizing: border-box;
+  line-height: 1.7;
+}
+
+.sectionLabel {
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #b91c1c;
+  margin-bottom: 12px;
+}
+
+/* Hàng tiêu đề vùng 2 – label + link "Đã có tài khoản" */
+.sectionTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.sectionTitleRow .sectionLabel {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  margin-right: 4px;
+}
+
+.courseInfoLeft {
+  flex: 1.1;
+  min-width: 0;
+  line-height: 1.9;
+}
+
+.benefitColumn {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Dòng + Khoá học */
+
+.courseLine {
+  font-size: 1rem;
+  color: #111827;
+  margin-bottom: 18px;
+}
+
+.courseLineLabel {
+  font-weight: 800;
+  color: #0303a5;
+}
+
+.courseLineValue {
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Meta: thời gian, giá */
+
+.courseMetaRow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.courseMetaItem {
+  font-size: 0.96rem;
+  color: #374151;
+}
+
+.courseMetaLabel {
+  font-weight: 800;
+  color: #0303a5;
+}
+
+.courseMetaValue {
+  font-weight: 500;
+}
+
+.coursePrice {
+  font-weight: 800;
+  color: #b91c1c;
+}
+
+/* Benefit title + bullets (cột phải) */
+
+.benefitTitleLine {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.benefitTitleHighlight {
+  font-weight: 800;
+  color: #0303a5;
+}
+
+.benefitList {
+  padding-left: 20px;
+  margin: 0 0 10px 0;
+}
+
+.benefitItem {
+  font-size: 0.92rem;
+  color: #4b5563;
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+
+/* + Chi tiết thông tin khoá học */
+
+.courseDetailLine {
+  font-size: 0.9rem;
+  color: #111827;
+  margin-top: 6px;
+}
+
+/* Link chi tiết */
+
+.guideLink {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.guideLink::after {
+  content: "↗";
+  font-size: 0.8rem;
+}
+
+.guideLink:hover {
+  text-decoration: underline;
+}
+
+/* ===== SECTION BLOCK CHUNG (VÙNG 2, 3, 4) ===== */
+
+.sectionBlock {
+  background: #f9fafb;
+  border-radius: 18px;
+  padding: 16px 16px 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  box-sizing: border-box;
+}
+
+/* ===== VÙNG 2 – FORM ĐĂNG KÝ ===== */
+
+.twoInputsRow {
+  display: flex;
+  gap: 12px;
+}
+
+.halfField {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ===== REQUIRED MARK ===== */
+
+.requiredMark {
+  color: #dc2626;
+  margin-left: 6px;
+  margin-right: 4px;
+  font-weight: 900;
+}
+
+.requiredNote {
+  font-size: 0.82rem;
+  color: #4b5563;
+  margin-bottom: 8px;
+}
+
+.formDescription {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.formFrame {
+  border-radius: 16px;
+  border: 1px dashed #e5e7eb;
+  background: #ffffff;
+  padding: 16px 14px 14px;
+  box-sizing: border-box;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.formColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.columnTitle {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #16a34a;
+  margin-bottom: 4px;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.textInput {
+  flex: 1;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 9px 40px 9px 14px;
+  font-size: 0.94rem;
+  outline: none;
+  background: #f9fafb;
+  color: #111827;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.textInput::placeholder {
+  color: #9ca3af;
+}
+
+.textInput:focus {
+  background: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+}
+
+.infoButton {
+  position: absolute;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: none;
+  background: #e5e7eb;
+  color: #374151;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.infoButton:hover {
+  background: #d1d5db;
+  transform: translateY(-1px);
+}
+
+.infoTooltip {
+  font-size: 0.82rem;
+  color: #374151;
+  background: #eff6ff;
+  border-radius: 10px;
+  padding: 6px 8px;
+  border-left: 3px solid #2563eb;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+/* "Đã có tài khoản" dạng link button, text xanh nước biển đậm */
+
+.existingAccountButton {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0a19e7; /* xanh nước biển đậm */
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.existingAccountButton:hover {
+  color: #0c4a6e; /* đậm hơn khi hover */
+}
+
+/* ========================================================= */
+/* VÙNG 3 + 4 – BỐ CỤC CẠNH NHAU                             */
+/* ========================================================= */
+
+.supportAndQrRow {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.supportBlock {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.qrBlock {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== VÙNG 3 – HỖ TRỢ TRỰC TUYẾN (NỬA TRÁI) ===== */
+
+.supportSection {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Nút Chat với Educo: chỉ còn NÚT, làm nổi */
+
+.supportChatButton {
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #f9fafb;
+  box-shadow: 0 8px 24px rgba(5, 150, 105, 0.45);
+  width: 30%;
+  margin: 0 0 8px 0;
+  text-align: center;
+  transform: scale(1);
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    filter 0.18s ease, background 0.18s ease;
+}
+
+.supportChatButton:hover {
+  transform: scale(1.5);
+  box-shadow: 0 18px 40px rgba(5, 150, 105, 0.6);
+  filter: brightness(1.05);
+}
+
+.supportZaloInfo {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 12px 14px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+  box-sizing: border-box;
+}
+
+.supportZaloLine {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 2px 0;
+}
+
+.supportNote {
+  font-size: 0.86rem;
+  color: #6b7280;
+  line-height: 1.5;
+  margin-top: 6px;
+}
+
+/* ===== VÙNG 4 – QR THANH TOÁN (NỬA PHẢI) ===== */
+
+.qrHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.qrTitlesRow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
+}
+
+.qrTitleLeft,
+.qrTitleRight {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.qrTitleLeft .sectionLabel,
+.qrTitleRight .sectionLabel {
+  margin-bottom: 0;
+}
+
+.qrStatusPending {
+  font-size: 0.86rem;
+  color: #b45309;
+  background: #fffbeb;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #fbbf24;
+}
+
+.qrStatusReady {
+  font-size: 0.86rem;
+  color: #065f46;
+  background: #ecfdf5;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #34d399;
+}
+
+.qrAndActivateRow {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+  height: 100%;
+}
+
+.qrSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.qrBox {
+  width: 100%;
+  max-width: 220px;
+  height: 220px;
+  border-radius: 18px;
+  border: 2px dashed #e5e7eb;
+  background: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px rgba(209, 213, 219, 0.4);
+}
+
+.qrPlaceholderText {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #057158;
+  text-align: center;
+  padding: 12px 12px;
+  line-height: 1.7;
+}
+
+.qrFakeCode {
+  width: 180px;
+  height: 180px;
+  border-radius: 12px;
+  background: #ffffff;
+  display: grid;
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.15);
+}
+
+.qrFakeRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.qrFakeRow span {
+  display: block;
+  width: 100%;
+  padding-bottom: 100%;
+  background: #111827;
+  border-radius: 2px;
+}
+
+/* Panel nút kích hoạt */
+
+.activatePanel {
+  flex: 1;
+  background: transparent;
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.activateButton {
+  border-radius: 999px;
+  padding: 13px 22px;
+  font-size: 1rem;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #bbf7d0, #4ade80);
+  color: #065f46;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+  transition: background 0.15s ease, transform 0.1s ease,
+    box-shadow 0.15s ease, filter 0.15s ease;
+  width: 100%;
+  text-align: center;
+  line-height: 1.8;
+}
+
+.activateButton:hover {
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  transform: scale(1.2);
+  box-shadow: 0 12px 32px rgba(22, 163, 74, 0.6);
+  filter: brightness(1.02);
+}
+
+.activateButton:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ===== POPUP ĐĂNG NHẬP / ĐĂNG KÝ (giống HomePage) ===== */
+
+.loginModalBackdrop,
+.registerModalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loginModalContent,
+.registerModalContent {
+  width: 100%;
+  max-width: 640px; /* cùng kích thước với HomePage */
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.35);
+  padding: 0 0 20px; /* header chiếm phần top */
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Header popup: nền xanh nhạt, bo góc trên */
+
+.loginModalHeader,
+.registerModalHeader {
+  background: #beefd3;
+  border-radius: 16px 16px 0 0;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.loginModalTitle,
+.registerModalTitle {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+/* Nút X đỏ */
+
+.loginModalCloseButton,
+.registerModalCloseButton {
+  border: none;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 999px;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.loginModalCloseButton:hover,
+.registerModalCloseButton:hover {
+  background: #b91c1c;
+  transform: scale(1.05);
+}
+
+.loginModalBody,
+.registerModalBody {
+  padding: 12px 16px 0;
+  box-sizing: border-box;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 960px) {
+  .mainContent {
+    padding: calc(var(--header-height) + 16px) 12px 24px;
+  }
+
+  .section {
+    padding: 16px 14px 22px;
+  }
+
+  .courseInfoBlock {
+    flex-direction: column;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .supportAndQrRow {
+    flex-direction: column;
+  }
+
+  .qrAndActivateRow {
+    flex-direction: column;
+  }
+
+  .qrBox {
+    max-width: 200px;
+    height: 200px;
+  }
+
+  .stepFlow {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .qrBox {
+    max-width: 180px;
+    height: 180px;
+  }
+
+  .qrFakeCode {
+    width: 150px;
+    height: 150px;
+  }
+
+  .stepFlow {
+    font-size: 1.15rem;
+  }
+
+  .sectionTitleRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .existingAccountButton {
+    align-self: flex-start;
+  }
+}

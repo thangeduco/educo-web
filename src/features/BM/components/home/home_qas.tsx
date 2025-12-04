@@ -10,14 +10,17 @@ import {
   YesNoAnswerType,
 } from '../../services/bmUserEventLogs.service';
 
+
+
+
 import type {
-  HomeQAsDto,
-  HomeQAItemDto,
-} from '../../model/HomeQAAnswerDto';
+  HomePageQAsDto,
+  HomePageQAItemDto,
+} from '../../model/home-page-param.dto';
 
 interface HomeQAsProps {
   role: UserRole;
-  qas: HomeQAsDto | null | undefined;
+  qas: HomePageQAsDto | null | undefined;
   loading: boolean;
   error: string | null;
 }
@@ -53,7 +56,7 @@ const HomeQAs: React.FC<HomeQAsProps> = ({ role, qas, loading, error }) => {
     }));
   };
 
-  const handleClickAnswer = (item: HomeQAItemDto, answer: YesNoAnswerType) => {
+  const handleClickAnswer = (item: HomePageQAItemDto, answer: YesNoAnswerType) => {
     handleSelectAnswer(item.id, answer);
 
     // Gọi service ghi log
@@ -125,11 +128,6 @@ const HomeQAs: React.FC<HomeQAsProps> = ({ role, qas, loading, error }) => {
       <div className={styles.sectionHeader}>
         Bố mẹ đang trăn trở điều gì về việc học của con?
       </div>
-      <div className={styles.sectionSubHeader}>
-        Chỉ vài câu “Có / Không” rất nhanh, nhưng sẽ giúp Educo hiểu rõ hơn những điều
-        khiến bố mẹ day dứt – để cùng tìm ra cách giúp con tiến bộ mỗi ngày.
-      </div>
-
       {/* ==== TRẠNG THÁI ==== */}
       {loading && <p className={styles.statusText}>Đang tải câu hỏi...</p>}
       {error && <p className={styles.errorText}>Có lỗi xảy ra: {error}</p>}
@@ -229,34 +227,6 @@ const HomeQAs: React.FC<HomeQAsProps> = ({ role, qas, loading, error }) => {
               );
             })}
           </div>
-
-          {/* ==== SUMMARY: KHOẢNH KHẮC “À, Ồ EDUCO” ==== */}
-          {answeredCount > 0 && (
-            <div className={styles.summaryBar}>
-              <div className={styles.summaryBadge}>
-                {answeredCount} câu đã được bạn trả lời
-              </div>
-              <div className={styles.summaryText}>
-                {yesCount > 0 ? (
-                  <>
-                    <span className={styles.summaryHighlight}>
-                      Có {yesCount} điều đang thực sự khiến bố mẹ trăn trở.
-                    </span>{' '}
-                    Đó cũng là những vấn đề Educo đã và đang giúp rất nhiều gia
-                    đình tháo gỡ mỗi ngày.
-                  </>
-                ) : (
-                  <>
-                    <span className={styles.summaryHighlight}>
-                      Bố mẹ đang khá yên tâm về việc học của con.
-                    </span>{' '}
-                    Educo vẫn có thể đồng hành để con giữ vững phong độ và bứt
-                    phá cao hơn nữa.
-                  </>
-                )}
-              </div>
-            </div>
-          )}
 
           {/* ==== BLOCK GREETING ==== */}
           {role && (

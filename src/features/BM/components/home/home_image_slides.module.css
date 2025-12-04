@@ -1,130 +1,71 @@
-/* WRAPPER CHUNG */
+/* ===== WRAPPER ===== */
 
 .container {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
-/* TIÊU ĐỀ */
-
-.sectionHeader {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #0f766e;
-  margin-bottom: 8px;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-left: 8px;
-  position: relative;
-}
-
-.sectionHeader::before {
-  content: "";
-  width: 0;
-  height: 0;
-  border-top: 9px solid transparent;
-  border-bottom: 9px solid transparent;
-  border-right: 12px solid #0f766e;
-  margin-right: 8px;
-}
-
-/* ===== SLIDER 3 PHẦN ===== */
+/* ===== SLIDER LAYOUT ===== */
 
 .sliderWrapper {
+  width: 100%;
   display: grid;
-  grid-template-columns: 0.6fr 2.4fr 0.6fr; /* nhỏ hơn 0.8 → 0.6 */
+  grid-template-columns: 0.45fr 3fr 0.45fr;
+  align-items: center;
   gap: 10px;
-  align-items: stretch;
 }
 
-/* SIDE SLIDES (PHẦN 1 & PHẦN 3) */
+/* ===== SIDE SLIDES ===== */
 
 .sideSlide {
-  position: relative;
   border: none;
   padding: 0;
   background: transparent;
   cursor: pointer;
   display: flex;
-  align-items: center;
   justify-content: center;
-  outline: none;
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease,
-    opacity 0.15s ease;
+  align-items: center;
 }
-
-/* đảm bảo vẫn có class sideLeft / sideRight cho CSS Modules */
-.sideLeft {
-}
-
-.sideRight {
-}
-
-.sideDisabled {
-  cursor: default;
-  opacity: 0.35;
-}
-
-.sideSlide:not(.sideDisabled):hover {
-  transform: translateY(-1px);
-}
-
-/* Khung chứa phần ảnh bị cắt */
 
 .sideImageMaskLeft,
 .sideImageMaskRight {
   position: relative;
   width: 100%;
-  padding-top: 70%;
-  border-radius: 16px;
+  padding-top: 75%;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
 }
-
-/* Hiển thị cùng 1 ảnh nhưng chỉ cho thấy một phần: */
-/* - Bên trái: phần bên phải của ảnh */
-/* - Bên phải: phần bên trái của ảnh */
 
 .sideImage {
   position: absolute;
   inset: 0;
-  width: 140%;
+  width: 135%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Phần 1: 1 phần bên phải của ảnh số (currentIndex - 1) */
 .sideImageMaskLeft .sideImage {
-  left: -40%;
+  left: -35%;
 }
 
-/* Phần 3: 1 phần bên trái của ảnh số (currentIndex + 1) */
 .sideImageMaskRight .sideImage {
   left: 0;
 }
 
-/* ===== MAIN SLIDE (PHẦN 2) ===== */
+/* ===== MAIN SLIDE ===== */
 
 .mainSlide {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 10px 12px;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
 }
 
 .mainImageWrapper {
   position: relative;
   width: 100%;
-  padding-top: 62%;
-  border-radius: 14px;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
   overflow: hidden;
   background: #e5e7eb;
 }
@@ -135,73 +76,34 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.25s ease;
 }
 
-.mainSlide:hover .mainImage {
-  transform: scale(1.01);
-}
-
-/* Caption: hiện tại chỉ chứa dãy dot */
+/* Dots */
 
 .mainCaption {
+  margin-top: 6px;
   display: flex;
   justify-content: center;
-  padding-top: 4px;
 }
-
-/* Dot indicator */
 
 .dotRow {
   display: flex;
-  align-items: center;
   gap: 6px;
 }
 
 .dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 999px;
   background: #e5e7eb;
-  transition: all 0.15s ease;
 }
 
 .dotActive {
-  width: 16px;
+  width: 18px;
   background: #0f766e;
 }
 
-/* ===== RESPONSIVE ===== */
-
-@media (max-width: 960px) {
-  .sliderWrapper {
-    grid-template-columns: 0.7fr 2fr 0.7fr;
-  }
-
-  .mainSlide {
-    padding: 8px 10px;
-  }
-}
-
-@media (max-width: 720px) {
-  .sliderWrapper {
-    grid-template-columns: 1fr;
-  }
-
-  .sideSlide {
-    display: none;
-  }
-
-  .mainSlide {
-    padding: 10px 12px;
-  }
-}
-
-@media (max-width: 640px) {
-  .sectionHeader {
-    font-size: 1rem;
-  }
-}
+/* STATUS */
 
 .statusText {
   margin-top: 8px;
@@ -213,4 +115,16 @@
   margin-top: 8px;
   font-size: 0.9rem;
   color: #ef4444;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 960px) {
+  .sliderWrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .sideSlide {
+    display: none;
+  }
 }

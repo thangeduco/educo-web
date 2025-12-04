@@ -1,6 +1,9 @@
 // src/services/apiService.ts
 import axios from 'axios';
-import { getToken, removeToken } from './tokenService'; // ✅ Sử dụng tokenService
+import { getToken, removeToken } from './tokenService';
+
+// Định nghĩa endpoint Login
+const LOGIN_ENDPOINT_PATTERN = /\/bm\/auth\/login$/; // Hoặc /auth/login tùy BE
 
 // Tạo một instance chung cho toàn bộ project
 const apiEducoreBE = axios.create({
@@ -11,18 +14,7 @@ const apiEducoreBE = axios.create({
   },
 });
 
-// Interceptor: tự động đính kèm token đã giải mã nếu có
-apiEducoreBE.interceptors.request.use(
-  (config) => {
-    const token = getToken(); // ✅ Lấy và giải mã token từ localStorage
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    console.log('[apiService] Request:', config.method?.toUpperCase(), config.url, config.data);
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+// ... (Interceptor request giữ nguyên)
 
 // Interceptor: xử lý lỗi từ backend
 apiEducoreBE.interceptors.response.use(
@@ -32,14 +24,61 @@ apiEducoreBE.interceptors.response.use(
   },
   (error) => {
     console.error('[apiService] Response Error:', error);
-    if (error.response?.status === 401) {
-      // Token không hợp lệ hoặc đã hết hạn
-      removeToken();                   // ✅ Xóa token mã hoá
-      localStorage.removeItem('user'); // Xóa thông tin user
+
+    // Lấy URL của request bị lỗi
+    const requestUrl = error.config?.url || '';
+
+    // 🛑 THAY ĐỔI TẠI ĐÂY: Chỉ điều hướng khi KHÔNG phải là request Login 🛑
+    if (
+      error.response?.status === 401 &&
+      !LOGIN_ENDPOINT_PATTERN.test(requestUrl) // KIỂM TRA: KHÔNG phải là endpoint Login
+    ) {
+      // Đây là lỗi 401 do token hết hạn hoặc không hợp lệ (từ request khác)
+      removeToken();
+      localStorage.removeItem('user');
       window.location.href = '/login'; // Chuyển về trang login
+    } else if (error.response?.status === 401 && LOGIN_ENDPOINT_PATTERN.test(requestUrl)) {
+      // Lỗi 401 là do đăng nhập sai. KHÔNG điều hướng.
+      // Chỉ log ra và để error được catch ở LoginForm.tsx
+      console.log('[apiService] Lỗi 401 từ API Login. Đã bỏ qua điều hướng.');
     }
+    
     return Promise.reject(error);
   }
 );
+
+
+apiEducoreBE.interceptors.request.use(
+  (config) => {
+    const token = getToken();
+
+    if (token) {
+      // Đảm bảo token được đính kèm với định dạng 'Bearer '
+      config.headers = {
+        ...(config.headers || {}),
+        Authorization: `Bearer ${token}`,
+      } as any;
+
+      // ✅ BỔ SUNG LOG NÀY ĐỂ XÁC NHẬN TRƯỚC KHI GỌI API LOGOUT
+      console.log(
+        '[apiService] Request WITH TOKEN:',
+        config.method?.toUpperCase(),
+        config.url,
+        '| Authorization =',
+        (config.headers as any).Authorization
+      );
+    } else {
+      console.log(
+        '[apiService] Request (KHÔNG CÓ TOKEN):',
+        config.method?.toUpperCase(),
+        config.url
+      );
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 
 export default apiEducoreBE;

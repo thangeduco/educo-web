@@ -4,11 +4,12 @@ import React from 'react';
 import styles from './home_image_slides.module.css';
 
 import type {
-  HomeImageSlideItemDto,
-} from '../../model/HomeImageSlideItemDto';
+  HomePageImageSlideDto,
+  HomePageImageItemDto,
+} from '../../model/home-page-param.dto';
 
 interface HomeImageSlidesProps {
-  slides: HomeImageSlideItemDto[];
+  slides: HomePageImageSlideDto;
   loading: boolean;
   error: string | null;
   currentIndex: number;
@@ -26,36 +27,26 @@ const HomeImageSlides: React.FC<HomeImageSlidesProps> = ({
 }) => {
   const total = slides.length;
 
-  let centerSlide: HomeImageSlideItemDto | null = null;
-  let leftSlide: HomeImageSlideItemDto | null = null;
-  let rightSlide: HomeImageSlideItemDto | null = null;
+  let centerSlide: HomePageImageItemDto | null = null;
+  let leftSlide: HomePageImageItemDto | null = null;
+  let rightSlide: HomePageImageItemDto | null = null;
 
   if (total > 0) {
-    const leftIndex = (currentIndex - 1 + total) % total;
-    const rightIndex = (currentIndex + 1) % total;
+    const safeIndex = Math.min(Math.max(currentIndex, 0), total - 1);
+    const leftIndex = (safeIndex - 1 + total) % total;
+    const rightIndex = (safeIndex + 1) % total;
 
-    centerSlide = slides[currentIndex];
+    centerSlide = slides[safeIndex];
     leftSlide = slides[leftIndex];
     rightSlide = slides[rightIndex];
   }
 
   return (
     <div className={styles.container}>
-      <div className={styles.sectionHeader}>
-        Educo đồng hành cùng bố mẹ, biến trăn trở thành tiến bộ mỗi ngày của con
-      </div>
-
-      {/* TRẠNG THÁI LOADING / ERROR / EMPTY */}
-      {loading && (
-        <p className={styles.statusText}>
-          Đang tải hình ảnh...
-        </p>
-      )}
+      {loading && <p className={styles.statusText}>Đang tải hình ảnh...</p>}
 
       {error && !loading && (
-        <p className={styles.errorText}>
-          Có lỗi xảy ra: {error}
-        </p>
+        <p className={styles.errorText}>Có lỗi xảy ra: {error}</p>
       )}
 
       {!loading && !error && total === 0 && (
@@ -64,10 +55,9 @@ const HomeImageSlides: React.FC<HomeImageSlidesProps> = ({
         </p>
       )}
 
-      {/* SLIDER CHỈ HIỂN THỊ KHI CÓ ÍT NHẤT 1 SLIDE */}
       {!loading && !error && total > 0 && centerSlide && (
         <div className={styles.sliderWrapper}>
-          {/* PHẦN TRÁI: nếu có từ 2 slide */}
+          {/* LEFT SIDE */}
           {total > 1 && leftSlide && (
             <button
               type="button"
@@ -85,7 +75,7 @@ const HomeImageSlides: React.FC<HomeImageSlidesProps> = ({
             </button>
           )}
 
-          {/* PHẦN GIỮA */}
+          {/* MAIN SLIDE */}
           <div className={styles.mainSlide}>
             <div className={styles.mainImageWrapper}>
               <img
@@ -109,7 +99,7 @@ const HomeImageSlides: React.FC<HomeImageSlidesProps> = ({
             </div>
           </div>
 
-          {/* PHẦN PHẢI: nếu có từ 2 slide */}
+          {/* RIGHT SIDE */}
           {total > 1 && rightSlide && (
             <button
               type="button"

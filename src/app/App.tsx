@@ -1,32 +1,33 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from '../features/BM/pages/HomePage';
-// import CourseContentPage from './pages/student/CourseContentPage';
 import ProductPreviewPage from '../features/BM/pages/ProductPreviewPage';
-// import LoginPage from './pages/common/LoginPage';
-// import RegisterPage from './pages/common/RegisterPage';
-// import GuidePage from './pages/student/GuidePage';
+import ProductSubscriptionPage from '../features/BM/pages/SubscriptionPage';
+import LoginPage from '../features/BM/components/users/LoginForm';
 import { UserProvider } from './context/UserContext';
+import { CourseWeekPage } from '../features/CM/pages/CourseWeekPage';
 
-// 👉 Các trang dành riêng cho giáo viên & phụ huynh
-// import TeacherDashboard from './pages/teacher/TeacherDashboardPage';
-// import ParentDashboard from './pages/parent/ParentDashboardPage';
-
-const App = () => (
+const App: React.FC = () => (
   <UserProvider>
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/preview/products/:productCode" element={<ProductPreviewPage />} />
-        {/* <Route path="/courses/:courseId" element={<CourseContentPage />} />
-        <Route path="/preview/:courseId" element={<CoursePreviewPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/huong-dan-hoc" element={<GuidePage />} /> */}
+        <Route
+          path="/preview/products/:productCode"
+          element={<ProductPreviewPage />}
+        />
+        <Route
+          path="/subscription/:productCode"
+          element={<ProductSubscriptionPage />}
+        />
+        {/* thêm route cho CourseWeekPage.tsx */}
+        <Route
+          path="/courses/:courseCode/weeks/:weekId"
+          element={<CourseWeekPage />}
+        />
 
-        {/* 👉 Bổ sung các route riêng */}
-        {/* <Route path="/teacher" element={<TeacherDashboard />} />
-        <Route path="/parent" element={<ParentDashboard />} /> */}
+        {/* Trang đăng nhập riêng (ngoài popup) */}
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Router>
   </UserProvider>

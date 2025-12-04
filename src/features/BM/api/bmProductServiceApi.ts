@@ -1,78 +1,43 @@
-// src/features/BM/api/bmProductServiceApi.ts
+// src/features/api/BM/bmProductServiceApi.ts
 
+import type { BMProductDto } from '../model/BMProductDto';
 import apiEducoreBE from '../../../services/apiService';
-import type { BMProductDtoList, BMProductDto } from '../model/BMProductDto';
+import { BM_TENANT_ZONE } from '../config/bmConfig';
 
-const PRODUCTS_TYPE_ENDPOINT = '/bm/products/courses';
+// Endpoint mẫu: /bm/products/:productCode
+const PRODUCT_DETAIL_ENDPOINT = (productCode: string) =>
+  `/bm/products/${productCode}`;
 
 /**
- * Gọi API GET /bm/products/courses
- * Backend trả:
- * {
- *   success: true,
- *   data: BMProductDto[]
- * }
+ * Gọi API lấy chi tiết product (bao gồm saleKit)
  */
-export const fetchProductsTypeCourseApi = async (): Promise<BMProductDtoList> => {
+export const fetchProductDetailApi = async (
+  productCode: string
+): Promise<BMProductDto> => {
+  console.log(
+    `[bmProductServiceApi] Gọi API lấy chi tiết sản phẩm "${productCode}", tenant zone:`,
+    BM_TENANT_ZONE
+  );
+
+  if (!productCode) {
+    throw new Error('Thiếu productCode khi gọi API chi tiết sản phẩm');
+  }
+
   try {
-    const response = await apiEducoreBE.get(PRODUCTS_TYPE_ENDPOINT);
+    const res = await apiEducoreBE.get(PRODUCT_DETAIL_ENDPOINT(productCode));
 
-    console.log('[fetchProductsTypeCourseApi] ✔ Raw response.data:', response.data);
+    const data = res.data as BMProductDto;
 
-    const raw = response.data;
-
-    // Kiểm tra cấu trúc { success, data }
-    if (!raw || typeof raw !== 'object') {
-      console.error(
-        '[fetchProductsTypeCourseApi] ❌ response.data không phải object:',
-        raw
-      );
-      throw new Error('API /bm/products/courses must return { success, data }');
-    }
-
-    const { success, data } = raw as {
-      success?: boolean;
-      data?: unknown;
-    };
-
-    if (success !== true) {
-      console.error(
-        '[fetchProductsTypeCourseApi] ❌ success !== true trong response:',
-        raw
-      );
-      throw new Error('API /bm/products/courses trả về success !== true');
-    }
-
-    if (!Array.isArray(data)) {
-      console.error(
-        '[fetchProductsTypeCourseApi] ❌ data không phải là mảng:',
-        data
-      );
-      throw new Error('API /bm/products/courses: `data` must be an array');
-    }
-
-    const typed: BMProductDtoList = data as BMProductDtoList;
-
-    // Validation nhẹ: success_stories phải là array hoặc null
-    typed.forEach((p: BMProductDto) => {
-      if (p.success_stories !== null && !Array.isArray(p.success_stories)) {
-        console.warn(
-          `[fetchProductsTypeCourseApi] ⚠ Field success_stories của product_code=${p.product_code} không phải array`,
-          p.success_stories
-        );
-      }
-    });
-
-    console.log(
-      '[fetchProductsTypeCourseApi] ✔ Parsed products count:',
-      typed.length
-    );
-    return typed;
+    return data;
   } catch (error: any) {
     console.error(
-      '[fetchProductsTypeCourseApi] ❌ Lỗi khi lấy danh sách khóa học:',
-      error?.response?.data || error
+      `[bmProductServiceApi] Lỗi khi tải chi tiết sản phẩm "${productCode}":`,
+      error
     );
-    throw error;
+
+    throw new Error(
+      error?.response?.data?.message ||
+        'Lỗi khi tải thông tin chi tiết sản phẩm'
+    );
   }
 };

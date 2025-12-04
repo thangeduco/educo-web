@@ -1,8 +1,8 @@
 /* ===== VARIABLES & RESET ===== */
 :root {
   --header-height: 64px;
-  --primary-color: #0f4c81;       /* Brand Primary */
-  --accent-color: #dc2626;        /* Red/Accent */
+  --primary-color: #0f4c81;
+  --accent-color: #dc2626;
   --bg-light: #f5f7fb;
   --text-dark: #1f2933;
   --text-gray: #4b5563;
@@ -33,7 +33,7 @@
   background: #ffffff;
   border-radius: var(--radius-lg);
   padding: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
   box-sizing: border-box;
 }
@@ -52,7 +52,6 @@
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--primary-color);
-  margin-bottom: 16px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -62,13 +61,6 @@
   color: var(--accent-color);
 }
 
-.sectionSubHeader {
-  font-size: 0.95rem;
-  color: var(--text-gray);
-  margin: 0 0 16px;
-  line-height: 1.6;
-}
-
 .blockFull {
   width: 100%;
 }
@@ -76,7 +68,7 @@
 .statusText,
 .errorText {
   text-align: center;
-  padding: 20px;
+  padding: 12px;
   color: var(--text-gray);
 }
 
@@ -90,74 +82,92 @@
   background-color: #f0f9ff;
 }
 
-/* ===== EVIDENCE / INTRO SECTION (Slides + text) ===== */
+/* ===== EVIDENCE (Thành tựu + Slides) ===== */
 
 .evidenceSection {
-  padding: 24px 0;
-  margin-bottom: 24px;
+  padding: 20px 0 8px 0;
+  margin-bottom: 6px; /* rất sát phần Products */
 }
 
+/* Trái = Thành tựu (2/5), phải = Slide (3/5) */
 .introGrid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  align-items: center;
-  gap: 40px;
+  grid-template-columns: 2fr 3fr;
+  align-items: flex-start;
+  gap: 24px;
+  margin-top: 20px;
 }
 
+/* Cột phải: slideshow */
 .introImageWrapper {
   width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
+  display: flex;
 }
 
-.introTextWrap {
+.introImageWrapper > div {
+  width: 100%;
+  aspect-ratio: 4 / 3 !important;
+}
+
+/* Cột trái: Thành tựu */
+.achievementWrapper {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
 }
 
-.introTitle {
+/* ===== THÀNH TỰU CỦA EDUCO – TEXT FOCUS ===== */
+
+.achievementCard {
+  padding: 8px 4px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.achievementTitle {
   font-size: 1.8rem;
   font-weight: 800;
-  color: var(--text-dark);
-  margin: 0;
-  line-height: 1.2;
-}
-
-.introDesc {
-  font-size: 1rem;
-  color: var(--text-gray);
-  line-height: 1.6;
-  margin: 0;
-}
-
-.introStats {
-  display: flex;
-  gap: 30px;
-  margin-top: 8px;
-  padding-top: 12px;
-  border-top: 1px solid #e5e7eb;
-}
-
-.statItem strong {
-  font-size: 1.5rem;
   color: var(--primary-color);
-  font-weight: 700;
-  display: block;
+  margin: 0 0 14px;
+  line-height: 1.25;
 }
 
-.statItem span {
-  font-size: 0.9rem;
-  color: var(--text-gray);
+.achievementIntro {
+  font-size: 1rem;
+  color: #374151;
+  line-height: 1.65;
+  margin: 0 0 18px;
+  font-weight: 400;
 }
 
-.introHint {
+.achievementList {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #111827;
+  list-style-type: disc;
+}
+
+.achievementList li {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.achievementNote {
+  margin-top: 16px;
   font-size: 0.9rem;
   color: #6b7280;
-  margin: 8px 0 0;
+  font-style: italic;
 }
 
 /* ===== PRODUCTS SECTION ===== */
+
+.section.productsSection {
+  margin-top: 0;
+  padding-top: 16px;
+}
 
 .tableResponsiveWrapper {
   width: 100%;
@@ -229,17 +239,11 @@
 @media (max-width: 960px) {
   .introGrid {
     grid-template-columns: 1fr;
-    gap: 30px;
-    text-align: center;
+    gap: 24px;
   }
 
-  .introTextWrap {
-    order: 2;
-    align-items: center;
-  }
-
-  .introImageWrapper {
-    order: 1;
+  .achievementCard {
+    text-align: left;
   }
 
   .sectionHeader {
@@ -257,10 +261,6 @@
     padding: 16px 12px;
   }
 
-  .introTitle {
-    font-size: 1.5rem;
-  }
-
   .philosophyQuote {
     font-size: 1.1rem;
     line-height: 1.6;
@@ -269,17 +269,141 @@
   .mobileHint {
     display: block;
   }
+}
 
-  .introStats {
-    justify-content: space-around;
-    gap: 15px;
-  }
+/* ======================================================= */
+/* ===== POPUP ĐĂNG NHẬP (LOGIN) - DÙNG CHO LOGIN FORM ===== */
+/* ======================================================= */
 
-  .statItem strong {
-    font-size: 1.2rem;
-  }
+.loginModalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  .statItem span {
-    font-size: 0.8rem;
-  }
+  /* tăng z-index cao hơn mọi thứ, kể cả Header */
+  z-index: 10050;
+}
+
+.loginModalContent {
+  width: 100%;
+  max-width: 450px; /* Kích thước popup Đăng nhập (base size) */
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.35);
+  padding: 0 0 20px;
+  position: relative;
+  box-sizing: border-box;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.loginModalHeader {
+  background: #beefd3;
+  border-radius: 16px 16px 0 0;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.loginModalTitle {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.loginModalCloseButton {
+  border: none;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 999px;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.loginModalCloseButton:hover {
+  background: #b91c1c;
+  transform: scale(1.05);
+}
+
+.loginModalBody {
+  padding: 12px 16px 0;
+  box-sizing: border-box;
+}
+
+/* ======================================================= */
+/* ===== POPUP ĐĂNG KÝ (REGISTER) - DÙNG CHO REGISTER FORM ===== */
+/* ======================================================= */
+
+.registerModalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10050;
+}
+
+.registerModalContent {
+  width: 100%;
+  /* Tăng max-width lên 1.2 lần (450px * 1.2 = 540px) */
+  max-width: 640px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.35);
+  padding: 0 0 20px;
+  position: relative;
+  box-sizing: border-box;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Header/body/close riêng cho popup đăng ký
+   Hiện tại đang copy style từ login để tách class,
+   sau này có thể chỉnh sửa độc lập. */
+
+.registerModalHeader {
+  background: #beefd3;
+  border-radius: 16px 16px 0 0;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.registerModalTitle {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.registerModalCloseButton {
+  border: none;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 999px;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.registerModalCloseButton:hover {
+  background: #b91c1c;
+  transform: scale(1.05);
+}
+
+.registerModalBody {
+  padding: 12px 16px 0;
+  box-sizing: border-box;
 }

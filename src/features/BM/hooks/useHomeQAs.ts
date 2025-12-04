@@ -1,20 +1,20 @@
 // src/features/BM/hooks/useHomeQAs.ts
 import { useEffect, useState } from 'react';
 import { fetchHomeQAsApi } from '../api/homePageParamsApi';
-import { HomeQAsDto, HomeQAItemDto } from '../model/HomeQAAnswerDto';
+import { HomePageQAsDto, HomePageQAItemDto } from '../model/home-page-param.dto';
 
 type UseHomeQAsResult = {
-  qas: HomeQAsDto;
+  qas: HomePageQAsDto;
   loading: boolean;
   error: string | null;
-  activeQuestion: HomeQAItemDto | null;
+  activeQuestion: HomePageQAItemDto | null;
   setActiveQuestionId: (id: string) => void;
   selectedAnswerType: 'yes' | 'no' | null;
   selectAnswer: (type: 'yes' | 'no') => void;
 };
 
 export function useHomeQAs(): UseHomeQAsResult {
-  const [qas, setQas] = useState<HomeQAsDto>([]);
+  const [qas, setQas] = useState<HomePageQAsDto>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 

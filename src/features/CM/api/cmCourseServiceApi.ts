@@ -5,16 +5,20 @@ import type { CMCourseDto } from '../model/CMCourseDto';
 
 /**
  * Endpoint backend CM:
- * GET /cm/courses/:courseCode
+ * GET /cm/courses/:courseCode/week-detail/public
  * Router backend:
- *   router.get('/courses/:courseCode', cmCourseController.getCourseByCode);
+ *   router.get(
+ *     '/courses/:courseCode/week-detail/public',
+ *     (req, res) =>
+ *       cmCourseWeekDetailController.getCourseWeekDetailForPublicView(req, res)
+ *   );
  */
-const CM_COURSE_BY_CODE_ENDPOINT = (courseCode: string) =>
-  `/cm/courses/${courseCode}`;
+const CM_COURSE_WEEK_DETAIL_PUBLIC_ENDPOINT = (courseCode: string) =>
+  `/cm/courses/${courseCode}/week-detail/public`;
 
 /**
- * Gọi API GET /cm/courses/:courseCode
- * Trả về 1 CMCourseDto (type-safe)
+ * Gọi API GET /cm/courses/:courseCode/week-detail/public
+ * Trả về CourseWeekDetailResponseDto (alias: CMCourseDto)
  */
 export const getCourseByCodeApi = async (
   courseCode: string
@@ -25,20 +29,16 @@ export const getCourseByCodeApi = async (
     }
 
     const response = await apiEducoreBE.get(
-      CM_COURSE_BY_CODE_ENDPOINT(courseCode)
+      CM_COURSE_WEEK_DETAIL_PUBLIC_ENDPOINT(courseCode)
     );
 
-    // Backend style:
-    // {
-    //   success: true,
-    //   data: { ... CMCourseDto ... }
-    // }
-    const data = response.data?.data ?? response.data;
+    // Backend trả trực tiếp DTO, không bọc success/data
+    const data = response.data ?? response.data;
 
     return data as CMCourseDto;
   } catch (error: any) {
     console.error(
-      '[getCourseByCodeApi] ❌ Lỗi khi lấy thông tin khoá học:',
+      '[getCourseByCodeApi] ❌ Lỗi khi lấy chi tiết khoá học (week-detail/public):',
       error?.response?.data || error
     );
     throw error;

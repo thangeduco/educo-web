@@ -3,45 +3,39 @@
 import React from 'react';
 import styles from './BMHomeProductsTable.module.css';
 import type {
-  BMProductDto,
-  BMProductDtoList,
-} from '../../model/BMProductDto';
+  HomePageCourseItemDto,
+  HomePageCoursesDto,
+} from '../../model/home-page-param.dto';
 
-/**
- * Kiểu dữ liệu cho sản phẩm được chọn.
- */
 export interface SelectedProduct {
-  product: BMProductDto;
+  product: HomePageCourseItemDto;
 }
 
 interface BMHomeProductTableProps {
-  products?: BMProductDtoList;
+  products?: HomePageCoursesDto;
   onProductSelect?: (selected: SelectedProduct) => void;
 }
-
-const FIXED_LEVELS: { code: number; label: string }[] = [
-  { code: 1, label: 'Cơ bản' },
-  { code: 2, label: 'Nâng cao' },
-  { code: 3, label: 'Luyện thi' },
-];
 
 const BMHomeProductsTable: React.FC<BMHomeProductTableProps> = ({
   products,
   onProductSelect,
 }) => {
-  const productList: BMProductDtoList =
+  const productList: HomePageCoursesDto =
     products && Array.isArray(products) && products.length > 0 ? products : [];
+
   const [activeProductKey, setActiveProductKey] = React.useState<string | null>(
     null
   );
 
-  const getProductKey = (product: BMProductDto) =>
-    `${product.grade ?? 'g'}-${product.level ?? 'l'}-${product.name}`;
+  const getProductKey = (product: HomePageCourseItemDto) =>
+    `${product.grade ?? 'g'}-${product.courseCode}-${product.title}`;
 
-  const handleClickProduct = (product: BMProductDto) => {
+  const handleClickProduct = (product: HomePageCourseItemDto | null) => {
+    if (!product) return;
+
     const key = getProductKey(product);
     setActiveProductKey(key);
-    // 👉 Chỉ emit ra ngoài cho HomePage xử lý điều hướng
+
     if (onProductSelect) {
       onProductSelect({ product });
     }
@@ -63,12 +57,74 @@ const BMHomeProductsTable: React.FC<BMHomeProductTableProps> = ({
     return ((grade - 1) % 4) + 1;
   };
 
+  const findProductByType = (
+    productsOfGrade: HomePageCoursesDto,
+    type: 'BASIC' | 'ADVANCE' | 'EXAM'
+  ): HomePageCourseItemDto | null => {
+    const upperType = type.toUpperCase();
+    const product = productsOfGrade.find((p) =>
+      p.courseCode?.toUpperCase().includes(upperType)
+    );
+    return product ?? null;
+  };
+
+  const getExamFallbackLabel = (grade: number) => {
+    if (grade >= 2 && grade <= 5) return 'Luyện thi CLC';
+    if (grade >= 6 && grade <= 9) return 'Luyện thi chuyên';
+    if (grade >= 10 && grade <= 12) return 'Luyện thi ĐH top';
+    return 'Luyện thi';
+  };
+
+  const getButtonVariantClass = (
+    variant: number,
+    level: 'basic' | 'advance' | 'exam'
+  ): string => {
+    const suffix =
+      level === 'basic'
+        ? 'Basic'
+        : level === 'advance'
+        ? 'Advance'
+        : 'Exam';
+
+    const key = `courseButton${suffix}Variant${variant}`;
+    return (styles as Record<string, string>)[key] ?? '';
+  };
+
+  const renderCourseButton = (
+    product: HomePageCourseItemDto | null,
+    fallbackLabel: string,
+    variant: number,
+    level: 'basic' | 'advance' | 'exam',
+    isActive: boolean
+  ) => {
+    const disabled = !product;
+    const variantClass = getButtonVariantClass(variant, level);
+
+    return (
+      <button
+        type="button"
+        className={[
+          styles.courseButton,
+          variantClass,
+          isActive ? styles.courseButtonActive : '',
+          disabled ? styles.courseButtonDisabled : '',
+        ]
+          .filter(Boolean)
+          .join(' ')}
+        onClick={() => handleClickProduct(product)}
+        disabled={disabled}
+      >
+        {product?.title ?? fallbackLabel}
+      </button>
+    );
+  };
+
   const renderTableForGrades = (grades: number[]) => {
     if (!grades || grades.length === 0) {
       return (
         <div className={styles.productsTableWrap}>
           <div className={styles.emptyRangeText}>
-            Hiện chưa có sản phẩm cho khối này.
+            Hiện chưa có khoá học cho khối này.
           </div>
         </div>
       );
@@ -80,11 +136,7 @@ const BMHomeProductsTable: React.FC<BMHomeProductTableProps> = ({
           <thead>
             <tr>
               <th className={styles.headerGradeCol}>Khối</th>
-              {FIXED_LEVELS.map((lv) => (
-                <th key={lv.code} className={styles.headerLevelCol}>
-                  {lv.label}
-                </th>
-              ))}
+              <th className={styles.headerLevelCol}>Khoá học</th>
             </tr>
           </thead>
           <tbody>
@@ -103,6 +155,15 @@ const BMHomeProductsTable: React.FC<BMHomeProductTableProps> = ({
                   `gradeColorVariant${variant}`
                 ] ?? styles.gradeColorDefault;
 
+              const basicProduct = findProductByType(productsOfGrade, 'BASIC');
+              const advanceProduct = findProductByType(
+                productsOfGrade,
+                'ADVANCE'
+              );
+              const examProduct = findProductByType(productsOfGrade, 'EXAM');
+
+              const examFallbackLabel = getExamFallbackLabel(grade);
+
               return (
                 <tr key={grade} className={rowColorClass}>
                   <td className={styles.gradeCell}>
@@ -113,36 +174,48 @@ const BMHomeProductsTable: React.FC<BMHomeProductTableProps> = ({
                     </div>
                   </td>
 
-                  {FIXED_LEVELS.map((lv) => {
-                    const product = productsOfGrade.find(
-                      (c) => c.level === lv.code
-                    );
-
-                    if (!product) {
-                      return (
-                        <td key={lv.code}>
-                          <span className={styles.emptyCell}>—</span>
-                        </td>
-                      );
-                    }
-
-                    const productKey = getProductKey(product);
-                    const isActive = activeProductKey === productKey;
-
-                    return (
-                      <td key={lv.code}>
-                        <button
-                          type="button"
-                          className={`${styles.productPill} ${gradeColorClass} ${
-                            isActive ? styles.productPillActive : ''
-                          }`}
-                          onClick={() => handleClickProduct(product)}
-                        >
-                          {product.name}
-                        </button>
-                      </td>
-                    );
-                  })}
+                  <td>
+                    {productsOfGrade.length === 0 ? (
+                      <span className={styles.emptyCell}>—</span>
+                    ) : (
+                      <div className={styles.courseColumns}>
+                        <div className={styles.courseCell}>
+                          {renderCourseButton(
+                            basicProduct,
+                            'Cơ bản',
+                            variant,
+                            'basic',
+                            basicProduct
+                              ? activeProductKey === getProductKey(basicProduct)
+                              : false
+                          )}
+                        </div>
+                        <div className={styles.courseCell}>
+                          {renderCourseButton(
+                            advanceProduct,
+                            'Nâng cao',
+                            variant,
+                            'advance',
+                            advanceProduct
+                              ? activeProductKey ===
+                                getProductKey(advanceProduct)
+                              : false
+                          )}
+                        </div>
+                        <div className={styles.courseCell}>
+                          {renderCourseButton(
+                            examProduct,
+                            examFallbackLabel,
+                            variant,
+                            'exam',
+                            examProduct
+                              ? activeProductKey === getProductKey(examProduct)
+                              : false
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </td>
                 </tr>
               );
             })}

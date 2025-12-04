@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
 import styles from './Header.module.css';
 import avatarImg from '../../assets/images/avatar.png';
-import { logout } from '../../features/BM/services/authService';
+import { logout } from '../../features/BM/api/authServiceApi';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useUser } from '../../app/context/UserContext';
 
-const Header: React.FC<{ fixed?: boolean }> = ({ fixed = false }) => {
+type HeaderProps = {
+  fixed?: boolean;
+  onLoginClick?: () => void;
+  onRegisterClick?: () => void;
+};
+
+const Header: React.FC<HeaderProps> = ({
+  fixed = false,
+  onLoginClick,
+  onRegisterClick,
+}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, setUser } = useUser();
   const [showAvatarModal, setShowAvatarModal] = useState(false);
 
-  const role = user?.role || 'student';
+  const fullName = user?.fullName || (user as any)?.username;
+  const avatarSrc = user?.profile?.avatarImage || avatarImg;
 
   const handleLogout = async () => {
     try {
@@ -19,7 +30,25 @@ const Header: React.FC<{ fixed?: boolean }> = ({ fixed = false }) => {
     } catch (e) {
       console.error('Lỗi đăng xuất', e);
     } finally {
-      window.location.reload(); // ✅ Reload để giữ nguyên URL
+      //window.location.reload(); // Reload để giữ nguyên URL
+    }
+  };
+
+  const handleLogin = () => {
+    if (onLoginClick) {
+      onLoginClick(); // mở popup login từ HomePage
+    } else {
+      // fallback: điều hướng sang trang /login
+      navigate('/login', { state: { from: location } });
+    }
+  };
+
+  const handleRegister = () => {
+    if (onRegisterClick) {
+      onRegisterClick(); // mở popup register từ HomePage
+    } else {
+      // fallback: điều hướng sang trang /register
+      navigate('/register', { state: { from: location } });
     }
   };
 
@@ -30,58 +59,68 @@ const Header: React.FC<{ fixed?: boolean }> = ({ fixed = false }) => {
           <div className={styles.avatarSloganRow}>
             {/* Bên trái: avatar công ty + slogan hệ thống */}
             <div className={styles.leftSection}>
-              <img src={avatarImg} alt="logo công ty" className={styles.avatar} />
+              <img
+                src={avatarImg}
+                alt="logo công ty"
+                className={styles.avatar}
+              />
               <p className={styles.systemSlogan}>
                 Nỗ lực của con - Đồng hành của bố mẹ - Tận tâm của thầy cô !
               </p>
             </div>
 
-            {/* Giữa: nút hướng dẫn + đăng xuất/đăng nhập + vai trò */}
+            {/* Giữa: nút đăng nhập / đăng ký / avatar + fullName + slogan */}
             <div className={styles.rightSection}>
               <div className={styles.authButtons}>
                 {user ? (
-                  <button className={styles.logout} onClick={handleLogout}>
-                    Đăng xuất
-                  </button>
-                ) : (
-                  <>
-                    <button
-                      className={styles.login}
-                      onClick={() => navigate('/login', { state: { from: location } })}
+                  // ĐÃ ĐĂNG NHẬP: Hiển thị avatar + fullName + slogan ở giữa
+                  <div className={styles.userInlineBlock}>
+                    <div
+                      className={styles.userAvatarWrapper}
+                      onClick={() => setShowAvatarModal(true)}
                     >
+                      <img
+                        src={avatarSrc}
+                        alt="Avatar người dùng"
+                        className={styles.userAvatar}
+                      />
+                    </div>
+                    <div className={styles.userText}>
+                      {fullName && (
+                        <div className={styles.fullName}>{fullName}</div>
+                      )}
+                      {user.profile?.slogen && (
+                        <p className={styles.userSlogan}>
+                          {user.profile.slogen}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  // CHƯA ĐĂNG NHẬP: giữ nguyên login/register
+                  <>
+                    <button className={styles.login} onClick={handleLogin}>
                       Đăng nhập
                     </button>
-                    <button className={styles.register} onClick={() => navigate('/register')}>
+                    <button
+                      className={styles.register}
+                      onClick={handleRegister}
+                    >
                       Đăng ký
                     </button>
                   </>
                 )}
               </div>
 
-              {/* Hiển thị vai trò */}
-              {user && (
-                <div className={styles.roleBox}>
-                  {role === 'parent' && <span className={styles.roleParent}>👨‍👩‍👧 Phụ huynh</span>}
-                  {role === 'teacher' && <span className={styles.roleTeacher}>👩‍🏫 Giáo viên</span>}
-                  {role === 'student' && <span className={styles.roleStudent}>👦 Học sinh</span>}
-                </div>
-              )}
+              {/* Bỏ hiển thị role – không render nữa */}
             </div>
 
-            {/* Bên phải nhất: Avatar + Slogan người dùng */}
-            {user?.profile?.avatarImage && (
+            {/* Bên phải nhất: ĐỔI CHỖ -> giờ là nút Đăng xuất */}
+            {user && (
               <div className={styles.userAvatarContainer}>
-                <div className={styles.userAvatarWrapper}>
-                  <img
-                    src={user.profile.avatarImage}
-                    alt="Avatar người dùng"
-                    className={styles.userAvatar}
-                    onClick={() => setShowAvatarModal(true)}
-                  />
-                </div>
-                {user.profile?.slogen && (
-                  <p className={styles.userSlogan}>{user.profile.slogen}</p>
-                )}
+                <button className={styles.logout} onClick={handleLogout}>
+                  Đăng xuất
+                </button>
               </div>
             )}
           </div>
@@ -90,9 +129,12 @@ const Header: React.FC<{ fixed?: boolean }> = ({ fixed = false }) => {
 
       {/* Modal phóng to ảnh avatar */}
       {showAvatarModal && (
-        <div className={styles.modalOverlay} onClick={() => setShowAvatarModal(false)}>
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setShowAvatarModal(false)}
+        >
           <img
-            src={user?.profile?.avatarImage}
+            src={avatarSrc}
             alt="Avatar phóng to"
             className={styles.modalAvatar}
             onClick={(e) => e.stopPropagation()}

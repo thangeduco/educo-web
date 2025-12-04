@@ -1,0 +1,118 @@
+.formWrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===== ERROR ===== */
+
+.error {
+  font-size: 0.85rem;
+  color: #b91c1c;
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+/* ===== FORM ROOT ===== */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ===== FIELD GROUP ===== */
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ===== LABEL ===== */
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a2b26;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ===== INPUTS ===== */
+
+.input {
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  outline: none;
+  background: #f9fafb;
+  color: #111827;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.input:focus {
+  background: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+}
+
+/* ===== ACTIONS ===== */
+
+.actions {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-start; /* ⭐ Căn TRÁI nút Đăng nhập */
+}
+
+/* Nút Đăng nhập: dùng cùng tone với nút Đăng nhập ở Header
+   giả định đã có biến --primary-color trong :root */
+.submitButton {
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  background: var(--primary-color, #0f4c81); /* ⭐ cùng màu header */
+  color: #f9fafb;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
+  transition: background 0.15s ease, transform 0.1s ease,
+    box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.submitButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.35);
+  filter: brightness(1.03);
+}
+
+.submitButton:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 640px) {
+  .actions {
+    justify-content: flex-start; /* vẫn căn trái trên mobile */
+  }
+
+  .submitButton {
+    width: 100%;
+  }
+}

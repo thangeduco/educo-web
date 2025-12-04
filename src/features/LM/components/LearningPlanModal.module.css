@@ -1,0 +1,399 @@
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* tránh bị header che */
+    z-index: 5000;
+}
+
+/* Cho phép nội dung modal scroll khi nhiều (đặc biệt trên màn nhỏ) */
+.modal {
+    background: #ffffff;
+    border-radius: 16px;
+    max-width: 960px;
+    width: 100%;
+    max-height: 90vh;
+    padding: 20px 24px 16px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    /* cho phép scroll nội dung popup */
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* Chào mừng bạn ... màu đỏ đậm */
+.title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #dc2626;
+}
+
+.closeButton {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    border-radius: 999px;
+    line-height: 1;
+    color: #64748b;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.closeButton:hover {
+    background: rgba(148, 163, 184, 0.15);
+    color: #0f172a;
+    transform: scale(1.05);
+}
+
+/* KHỐI TRÊN: 4 CỘT (3 : 3 : 1 : 2) - CHUNG BACKGROUND */
+
+.topInfoGrid {
+    display: grid;
+    grid-template-columns: 3fr 3fr 1fr 3fr;
+    gap: 16px;
+    margin-top: 8px;
+
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #a1eef0;          /* dùng màu nền giống course info cũ */
+    border: 1px solid #e2e8f0;
+}
+
+/* COURSE INFO (CỘT 1) */
+
+.courseInfo {
+    padding: 4px 8px;             /* vẫn có padding nhẹ cho nội dung */
+    border-radius: 8px;
+    background: transparent;      /* dùng nền chung của topInfoGrid */
+    border: none;
+}
+
+.courseInfoCourseTitle {
+    margin: 0 0 12px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #dc2626;
+}
+
+.courseInfoLine {
+    margin: 3px 0;
+    font-size: 13px;
+    display: flex;
+    align-items: baseline;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.courseInfoLabel {
+    font-weight: 800;
+    color: #097941;
+}
+
+.courseInfoValue {
+    font-weight: 800;
+    color: #dc2626;
+}
+
+/* CỘT 2 & 4 */
+
+.topColumn {
+    background: transparent; /* dùng nền chung */
+}
+
+/* Cột mũi tên (CỘT 3) */
+
+.topArrowColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+}
+
+.arrowSpacerTop,
+.arrowSpacerBottom {
+    flex: 1;
+}
+
+.arrowRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrowIcon {
+    font-size: 40px;
+    font-weight: 700;
+    color: #1d4ed8;
+}
+
+/* Câu hỏi bên trái */
+.columnTitleQuestion {
+    margin: 0 0 8px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #dc2626;
+}
+
+/* "Kế hoạch học tập" màu đỏ đậm */
+.columnTitlePlan {
+    margin: 0 0 8px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #dc2626;
+}
+
+/* GRID checkbox */
+
+.weeklyOptionsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.weeklyRow {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 12px;
+}
+
+.weeklyRowSingle {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.checkboxItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #0f172a;
+    cursor: pointer;
+}
+
+.checkboxItem input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* BLOCK thông tin kế hoạch (số tuần, ngày hoàn thành) - CỘT 4 */
+
+.planSummaryBox {
+    margin-top: 6px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: #f1f7d0;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.infoRow {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    margin-bottom: 9px;
+}
+
+.infoRow:last-child {
+    margin-bottom: 0;
+}
+
+.infoLabel {
+    font-weight: 800;
+    color: #1d4ed8;
+}
+
+.infoValue {
+    font-weight: 800;
+    color: #dc2626;
+}
+
+/* PHẦN DƯỚI: BẢNG CHỌN KHUNG GIỜ */
+
+.scheduleSection {
+    margin-top: 12px;
+}
+
+.scheduleSubtitle {
+    margin: 0 0 8px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #dc2626;
+}
+
+.scheduleTable {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.scheduleRow {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 2fr 2fr;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+/* Cột 1: Thứ */
+.scheduleCellDay {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 800;
+    color: #1d4ed8;
+}
+
+/* Cột 2–5: label + input/span */
+.scheduleCell {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+}
+
+/* Highlight nền khi đã chọn Giờ bắt đầu 1 hoặc 2 */
+.scheduleCellHighlight {
+    background: #a1eef0;
+    border-radius: 8px;
+}
+
+.timeSlotFieldLabel {
+    font-weight: 650;
+    color: #e20c5a;
+}
+.timeEndSlotFieldLabel {
+    font-weight: 650;
+    color: #132ceb;
+}
+
+/* tăng kích thước date time picker ~1.5 lần */
+.timeInput {
+    padding: 5px 7px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #cbd5f5;
+    background: #ffffff;
+    color: #0f172a;
+    height: 36px;
+}
+
+.timeSlotEndTime {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1d4ed8;
+}
+
+/* FOOTER */
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.secondaryButton,
+.primaryButton {
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease,
+        box-shadow 0.15s ease;
+}
+
+.secondaryButton {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.secondaryButton:hover {
+    background: #d1d5db;
+}
+
+.primaryButton {
+    background: linear-gradient(90deg, #2563eb, #06b6d4);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+}
+
+.primaryButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.6);
+}
+
+.primaryButton:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(37, 99, 235, 0.5);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 960px) {
+    .modal {
+        max-width: 100%;
+        margin: 0 8px;
+    }
+
+    .topInfoGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .topArrowColumn {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .arrowSpacerTop,
+    .arrowSpacerBottom {
+        display: none;
+    }
+
+    .arrowIcon {
+        transform: rotate(90deg);
+    }
+}
+
+@media (max-width: 720px) {
+    .modal {
+        max-height: 95vh;
+    }
+
+    .scheduleRow {
+        grid-template-columns: 1fr;
+    }
+
+    .scheduleCellDay {
+        justify-content: flex-start;
+    }
+
+    .scheduleCell {
+        justify-content: flex-start;
+    }
+}

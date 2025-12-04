@@ -1,12 +1,12 @@
 // src/features/BM/hooks/useHomeImageSlides.ts
 import { useEffect, useState } from 'react';
-import { fetchHomeImageSlidesApi } from '../api/homePageParamsApi';
+import { fetchHomeImageSlideApi } from '../api/homePageParamsApi';
 import {
-  HomeImageSlidesDto,
-} from '../model/HomeImageSlideItemDto';
+  HomePageImageSlideDto,
+} from '../model/home-page-param.dto';
 
 type UseHomeImageSlidesResult = {
-  slides: HomeImageSlidesDto;
+  slides: HomePageImageSlideDto;   // 👈 chỉ là 1 mảng item, không phải mảng của mảng
   loading: boolean;
   error: string | null;
   currentIndex: number;
@@ -14,8 +14,9 @@ type UseHomeImageSlidesResult = {
   goToNext: () => void;
 };
 
-export function useHomeImageSlides(): UseHomeImageSlidesResult {
-  const [slides, setSlides] = useState<HomeImageSlidesDto>([]);
+export function useHomeImageSlide(): UseHomeImageSlidesResult {
+  // 👇 khởi tạo là mảng rỗng các item
+  const [slides, setSlides] = useState<HomePageImageSlideDto>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -29,7 +30,7 @@ export function useHomeImageSlides(): UseHomeImageSlidesResult {
         setLoading(true);
         setError(null);
 
-        const data = await fetchHomeImageSlidesApi();
+        const data = await fetchHomeImageSlideApi(); // Promise<HomePageImageSlideDto>
 
         if (!isMounted) return;
 

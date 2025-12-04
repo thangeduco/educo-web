@@ -1,0 +1,80 @@
+/* src/features/CM/components/CourseWeekSidebar.module.css */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebarTitle {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.weekList {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.weekBlock {
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px 10px;
+  cursor: pointer; /* 👉 click được cả block tuần */
+}
+
+.weekBlockSelected {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.35);
+}
+
+.weekHeader {
+  width: 100%;
+  padding: 0;
+  margin: 0 0 6px;
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Title Tuần – xanh đậm, font ~75%: 20px → 15px */
+.weekTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #067e2c;
+}
+
+/* Danh sách bài học – thụt vào, tím đậm, font ~75%: 18px → 14px */
+.lessonList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 12px;
+}
+
+.lessonItem {
+  padding: 2px 0;
+  cursor: pointer; /* 👉 click vào bài học */
+}
+
+.lessonTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #340228;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .sidebar {
+    max-height: 320px;
+  }
+}

@@ -1,5 +1,3 @@
-/* src/features/BM/components/BMHomeProductsTable.module.css */
-
 /* ===== LAYOUT CHIA 2 CỘT: KHỐI 1–6 & 7–12 ===== */
 
 .productsSplitLayout {
@@ -16,19 +14,12 @@
   gap: 8px;
 }
 
-.productsColumnHeader {
-  font-size: 0.98rem;
-  font-weight: 700;
-  color: #111827;
-  padding-left: 4px;
-}
-
-/* ===== BẢNG SẢN PHẨM ===== */
+/* ===== BẢNG KHOÁ HỌC ===== */
 
 .productsTableWrap {
   width: 100%;
   overflow-x: auto;
-  padding-right: 16px; /* CHỪA KHOẢNG TRỐNG BÊN PHẢI CHO NÚT LUYỆN THI KHI PHÓNG TO */
+  padding-right: 16px;
   box-sizing: border-box;
 }
 
@@ -37,28 +28,25 @@
   border-collapse: collapse;
   background-color: #ffffff;
   border-radius: 12px;
-  /* không dùng hidden để không cắt box-shadow / scale của nút */
   overflow: visible;
 }
 
-/* Header nền dịu mắt */
 .productsTable thead {
   background: linear-gradient(135deg, #f5fdfb, #eef2ff);
 }
 
 .productsTable th,
 .productsTable td {
-  padding: 6px 10px;
+  padding: 8px 10px;
   text-align: center;
   white-space: nowrap;
   border-bottom: 1px solid #e5e7eb;
 }
 
-/* Header lớn, đậm, xanh đậm */
 .productsTable thead th {
   font-weight: 800;
-  color: blue;
-  font-size: 1.1rem;
+  color: #1f2937;
+  font-size: 1rem;
 }
 
 .headerGradeCol {
@@ -66,14 +54,13 @@
 }
 
 .headerLevelCol {
-  min-width: 140px;
+  min-width: 220px;
 }
 
 .productsTable tbody tr:hover {
   filter: brightness(0.97);
 }
 
-/* Text khi không có khóa cho range nào đó */
 .emptyRangeText {
   font-size: 0.86rem;
   color: #6b7280;
@@ -87,8 +74,8 @@
 }
 
 .gradeSquare {
-  width: 38px;
-  height: 38px;
+  width: 46px;
+  height: 46px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -100,18 +87,32 @@
   border: 1px solid transparent;
 }
 
-/* Cell trống */
 .emptyCell {
   font-size: 0.8rem;
   color: #9ca3af;
 }
 
-/* ===== Pill Button (NÚT SẢN PHẨM) ===== */
+/* ===== 3 CỘT KHOÁ HỌC: CƠ BẢN / NÂNG CAO / LUYỆN THI ===== */
 
-.productPill {
+.courseColumns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  align-items: stretch;
+}
+
+.courseCell {
+  display: flex;
+  align-items: stretch;
+}
+
+/* nút khoá học */
+
+.courseButton {
+  flex: 1;
   border-radius: 999px;
-  padding: 4px 12px;
-  font-size: 0.9rem;
+  padding: 10px 12px; /* tăng chiều cao */
+  font-size: 0.95rem; /* chữ lớn hơn 1 chút */
   font-weight: 700;
   background-color: #e5e7eb;
   color: #111827;
@@ -122,24 +123,30 @@
     background-color 0.12s ease-out,
     color 0.12s ease-out,
     box-shadow 0.12s ease-out,
-    transform 0.12s ease-out,
+    transform 0.14s ease-out,
     filter 0.12s ease-out;
+  transform-origin: center;
 }
 
-/* Hiệu ứng: khi hover thì nút phóng to rõ rệt nhưng vẫn trong vùng nhìn */
-.productPill:hover {
-  transform: scale(1.06);
-  filter: brightness(0.96);
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+.courseButton:hover:not(:disabled) {
+  transform: scale(1.20);  /* tăng từ 1.04 → 1.20 */
+  filter: brightness(0.94);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
 }
 
-/* Nút đang được chọn */
-.productPillActive {
+.courseButtonActive {
   box-shadow: 0 0 0 2px rgba(14, 116, 144, 0.45);
   filter: brightness(0.92);
 }
 
-/* ===== 4 MÀU LUÂN PHIÊN: tím – xanh – xanh lá – cam ===== */
+.courseButtonDisabled {
+  cursor: default;
+  opacity: 0.4;
+  box-shadow: none;
+  filter: none;
+}
+
+/* ===== 4 MÀU LUÂN PHIÊN CHO Ô KHỐI ===== */
 
 .gradeColorDefault {
   background-color: #6b7280;
@@ -147,7 +154,6 @@
   color: #ffffff;
 }
 
-/* Variant 1 — TÍM */
 .rowColorVariant1 {
   background-color: #faf5ff;
 }
@@ -158,7 +164,6 @@
   color: #ffffff;
 }
 
-/* Variant 2 — XANH DƯƠNG NHẠT */
 .rowColorVariant2 {
   background-color: #f5fbff;
 }
@@ -169,7 +174,6 @@
   color: #ffffff;
 }
 
-/* Variant 3 — XANH LÁ NHẠT */
 .rowColorVariant3 {
   background-color: #ebffe7;
 }
@@ -180,7 +184,6 @@
   color: #ffffff;
 }
 
-/* Variant 4 — CAM */
 .rowColorVariant4 {
   background-color: #fff7eb;
 }
@@ -191,57 +194,80 @@
   color: #ffffff;
 }
 
-/* ===== PANEL THÔNG TIN (dùng ở màn khác nếu cần) ===== */
+/* ===== MÀU NÚT THEO KHỐI + MỨC ĐỘ (Cơ bản < Nâng cao < Luyện thi) ===== */
+/* Variant 1: tone tím */
 
-.productInfoPanel {
-  border-radius: 16px;
-  padding: 14px 16px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.courseButtonBasicVariant1 {
+  background-color: #e9d4ff; /* đậm hơn */
+  color: #4b0f68;
 }
 
-.productInfoPlaceholder {
-  font-size: 0.88rem;
-  color: #6b7280;
-  line-height: 1.5;
+.courseButtonAdvanceVariant1 {
+  background-color: #d8b0ff; /* đậm hơn cũ */
+  color: #451066;
 }
 
-.productInfoTitle {
-  font-size: 1.05rem;
-  font-weight: 650;
-  color: #111827;
+.courseButtonExamVariant1 {
+  background-color: #b34ce8; /* đậm hơn */
+  color: #3b0764;
 }
 
-.productInfoMeta {
-  font-size: 0.88rem;
-  color: #4b5563;
+/* Variant 2: tone xanh dương */
+
+.courseButtonBasicVariant2 {
+  background-color: #d6eaff; /* đậm hơn */
+  color: #024272;
 }
 
-.productInfoDescription {
-  margin-top: 6px;
+.courseButtonAdvanceVariant2 {
+  background-color: #b8dbff; /* đậm hơn */
+  color: #02335a;
 }
 
-.descriptionText {
-  margin: 0;
-  font-size: 0.92rem;
-  color: #1f2937;
-  line-height: 1.55;
+.courseButtonExamVariant2 {
+  background-color: #42b5ee; /* đậm hơn */
+  color: #012a4a;
 }
 
-.productInfoPlaceholderText {
-  font-size: 0.86rem;
-  color: #6b7280;
+/* Variant 3: tone xanh lá */
+
+.courseButtonBasicVariant3 {
+  background-color: #d7f8d0; /* đậm hơn */
+  color: #14532d;
+}
+
+.courseButtonAdvanceVariant3 {
+  background-color: #c4f3bb; /* đậm hơn */
+  color: #14532d;
+}
+
+.courseButtonExamVariant3 {
+  background-color: #6cd85a; /* đậm hơn */
+  color: #14532d;
+}
+
+/* Variant 4: tone cam */
+
+.courseButtonBasicVariant4 {
+  background-color: #ffe6c7; /* đậm hơn */
+  color: #7c2d12;
+}
+
+.courseButtonAdvanceVariant4 {
+  background-color: #ffd49a; /* đậm hơn */
+  color: #7c2d12;
+}
+
+.courseButtonExamVariant4 {
+  background-color: #e38a21; /* đậm hơn */
+  color: #7c2d12;
 }
 
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 960px) {
   .productsSplitLayout {
-    grid-template-columns: 1fr; /* màn hình nhỏ: 2 bảng xếp dọc */
+    grid-template-columns: 1fr;
   }
 }
 
@@ -259,5 +285,9 @@
 
   .productsTable thead th {
     font-size: 0.9rem;
+  }
+
+  .headerLevelCol {
+    min-width: 200px;
   }
 }

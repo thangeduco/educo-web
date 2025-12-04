@@ -1,23 +1,24 @@
-import { HomeQAsDto } from '../model/HomeQAAnswerDto';
 import {
-  HomeImageSlideItemDto,
-  HomeImageSlidesDto,
-} from '../model/HomeImageSlideItemDto';
-import { HomeUserGuideDto } from '../model/HomeUserGuideDto';
+  HomePageQAsDto,
+  HomePageImageSlideDto,
+  HomePageCoursesDto,
+  HomePageAchievementDto,
+} from '../model/home-page-param.dto';
 import { BM_TENANT_ZONE } from '../config/bmConfig';
 import apiEducoreBE from '../../../services/apiService';
 
 // Endpoint theo tenant zone
-const HOME_QAS_ENDPOINT = `/bm/${BM_TENANT_ZONE}/home-page-qas`;
-const HOME_IMAGE_SLIDES_ENDPOINT = `/bm/${BM_TENANT_ZONE}/home-page-image-slides`;
-const HOME_USER_GUIDE_ENDPOINT = `/bm/${BM_TENANT_ZONE}/home-page-user-guide`;
-export const fetchHomeQAsApi = async (): Promise<HomeQAsDto> => {
+const HOME_QAS_ENDPOINT = `/bm/home-page/qas`;
+const HOME_IMAGE_SLIDE_ENDPOINT = `/bm/home-page/image-slide`;
+const HOME_COURSES_ENDPOINT = `/bm/home-page/courses`;
+const HOME_PAGE_ACHIEVEMENT = `/bm/home-page/archievement`;
+export const fetchHomeQAsApi = async (): Promise<HomePageQAsDto> => {
   console.log('[homeQAsApi] Gọi API lấy danh sách Q&A Home Page, zone:', BM_TENANT_ZONE);
 
   try {
     const res = await apiEducoreBE.get(HOME_QAS_ENDPOINT);
 
-    const data = res.data as HomeQAsDto;
+    const data = res.data as HomePageQAsDto;
 
     // Sort theo display_order
     return [...data].sort((a, b) => a.display_order - b.display_order);
@@ -27,16 +28,16 @@ export const fetchHomeQAsApi = async (): Promise<HomeQAsDto> => {
   }
 };
 
-export const fetchHomeImageSlidesApi = async (): Promise<HomeImageSlidesDto> => {
+export const fetchHomeImageSlideApi = async (): Promise<HomePageImageSlideDto> => {
   console.log(
     '[homePageParamsApi] Gọi API lấy danh sách Home Image Slides, tenant:',
     BM_TENANT_ZONE
   );
 
   try {
-    const res = await apiEducoreBE.get(HOME_IMAGE_SLIDES_ENDPOINT);
+    const res = await apiEducoreBE.get(HOME_IMAGE_SLIDE_ENDPOINT);
 
-    const data = res.data as HomeImageSlidesDto;
+    const data = res.data as HomePageImageSlideDto;
 
     // Sort theo display_order
     return [...data].sort(
@@ -51,22 +52,50 @@ export const fetchHomeImageSlidesApi = async (): Promise<HomeImageSlidesDto> => 
   }
 };
 
-// Lấy thông tin user guide
-export const fetchHomeUserGuideApi = async (): Promise<HomeUserGuideDto> => {
+export const fetchHomeCoursesApi = async (): Promise<HomePageCoursesDto> => {
   console.log(
-    '[homePageParamsApi] Gọi API lấy Home User Guide, tenant:',
+    '[homePageParamsApi] Gọi API lấy danh sách Home Courses, tenant:',
     BM_TENANT_ZONE
   );
 
   try {
-    const res = await apiEducoreBE.get(HOME_USER_GUIDE_ENDPOINT);
+    const res = await apiEducoreBE.get(HOME_COURSES_ENDPOINT);
 
-    const data = res.data as HomeUserGuideDto;
-    return data;
+    const data = res.data as HomePageCoursesDto;
+
+    // Sort theo display_order nếu có
+    return [...data].sort(
+      (a, b) => (a.display_order ?? 0) - (b.display_order ?? 0)
+    );
   } catch (error: any) {
-    console.error('[homePageParamsApi] Lỗi khi tải Home User Guide:', error);
+    console.error('[homePageParamsApi] Lỗi khi tải Home Courses:', error);
     throw new Error(
-      error?.response?.data?.message || 'Lỗi khi tải Home User Guide'
+      error?.response?.data?.message ||
+        'Lỗi khi tải danh sách khóa học Home Page'
     );
   }
 };
+
+//fet HOME_PAGE_ACHIEVEMENT
+export const fetchHomeArchievementApi = async (): Promise<HomePageAchievementDto> => {
+  console.log(
+    '[homePageParamsApi] Gọi API lấy thông tin Home Achievement, tenant:',
+    BM_TENANT_ZONE
+  );
+
+  try {
+    const res = await apiEducoreBE.get(HOME_PAGE_ACHIEVEMENT);
+
+    const data = res.data;
+
+    return data;
+  } catch (error: any) {
+    console.error('[homePageParamsApi] Lỗi khi tải Home Achievement:', error);
+    throw new Error(
+      error?.response?.data?.message ||
+        'Lỗi khi tải thông tin Home Achievement'
+    );
+  }
+};
+
+

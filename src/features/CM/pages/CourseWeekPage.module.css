@@ -1,0 +1,87 @@
+/* src/features/CM/CourseWeekPage.module.css */
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f5f7fb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Spacer để nội dung bắt đầu ngay dưới Header (fixed) */
+.headerSpacer {
+  height: 72px; /* chỉnh theo chiều cao Header thực tế nếu cần */
+}
+
+/* Footer placeholder (nếu sau này thay bằng Footer chung thì vẫn dùng lại class này được) */
+.appFooterPlaceholder {
+  padding: 12px 24px;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Nội dung chính của trang CourseWeek */
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px 24px;
+  gap: 16px;
+}
+
+.sectionCourseInfo {
+  margin-bottom: 4px;
+}
+
+/* Layout 2 cột: sidebar + chi tiết tuần */
+.sectionBody {
+  display: flex;
+  gap: 16px;
+  min-height: 0;
+  flex: 1;
+}
+
+/* Sidebar (Section 2) */
+.sidebarWrapper {
+  width: 320px;
+  min-width: 280px;
+  max-width: 360px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  padding: 12px 8px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Week detail (Section 3) */
+.weekDetailWrapper {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  padding: 16px 20px;
+  overflow-y: auto;
+  max-height: calc(100vh - 160px); /* trừ header + footer + padding tổng thể */
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .sectionBody {
+    flex-direction: column;
+  }
+
+  .sidebarWrapper {
+    width: 100%;
+    max-width: 100%;
+    order: 1;
+  }
+
+  .weekDetailWrapper {
+    order: 2;
+    max-height: none;
+  }
+}

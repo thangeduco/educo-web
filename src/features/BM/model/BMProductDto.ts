@@ -1,76 +1,126 @@
-// src/features/BM/model/homeCourseDto.ts
+// src/features/BM/model/BMProductDto.ts
 
 /**
- * Một câu chuyện thành công của học sinh.
- * FE nhận từ API backend (snake_case).
+ * ============================
+ * SALE KIT DTO (từ edu-be)
+ * ============================
  */
-export interface BMProductSuccessStoryDto {
-  image_url: string;   // ảnh học sinh (nằm trong avatar tròn)
-  title: string;       // tiêu đề ngắn
-  story: string;       // câu chuyện chi tiết
+
+export interface ProductSaleKitSectionBaseDto {
+  imageUrl: string;
+  title: string;
+  highlights: string[];
+  inspirationalQuote: string;
+}
+
+export interface ProductSaleKitSectionWithGuideDto
+  extends ProductSaleKitSectionBaseDto {
+  guideUrl: string;
+}
+
+export interface ProductSaleKitSuccessStoryDto {
+  id: string;
+  avatarUrl: string;
+  storyTitle: string;
+  storyContent: string;
+}
+
+export interface ProductSaleKitDto {
+  version: number;
+  learningSection: ProductSaleKitSectionBaseDto;
+  parentSupportSection: ProductSaleKitSectionWithGuideDto;
+  pricingSection: ProductSaleKitSectionWithGuideDto;
+  successStories: ProductSaleKitSuccessStoryDto[];
 }
 
 /**
- * DTO Khóa học trả về từ API educo-backend (snake_case)
- * GET /bm/products/courses
+ * ============================
+ * SALE TERMS DTO (từ edu-be)
+ * ============================
+ */
+
+export interface ProductSaleTermsBenefitsDto {
+  title: string;
+  shortDescription: string[];
+  detailedUrl: string;
+}
+
+export interface ProductSaleTermsSupportDto {
+  title: string;
+  chatLabel: string;
+  chatUrl: string;
+  zaloCskh: string;
+  zaloTeacher: string;
+  zaloCeo: string;
+}
+
+export interface ProductSaleTermsDto {
+  benefits: ProductSaleTermsBenefitsDto;
+  support: ProductSaleTermsSupportDto;
+}
+
+/**
+ * ============================
+ * SUBSCRIPTION PREVIEW DTO
+ * BE tự sinh: now() → 31/05 năm sau
+ * ============================
+ */
+export interface SubscriptionPreviewDto {
+  startAt: string; // ISO string
+  endAt: string;   // ISO string
+  label: string;   // e.g. "26/11/2025 - 31/05/2026"
+}
+
+/**
+ * ============================
+ * PRODUCT DTO cho FE
+ * Map 1-1 với ProductResponseDto backend
+ * ============================
  */
 export interface BMProductDto {
-  id: number;
+  productId: number;
+  productCode: string;
+  productName: string;
+  productType: string;
+  description?: string;
+  price: number;
+  currency: string;
+  billingCycle?: string;
+  isActive: boolean;
+  trialDays?: number;
+  metadataJson?: any;
 
-  product_code: string;
-  product_type: string; // 'COURSE'
+  saleKit: ProductSaleKitDto | null;
+  saleTerms: ProductSaleTermsDto | null;
 
-  name: string;
-  product_title: string | null;
-  tagline: string | null;
-  description: string | null;
-  thumbnail_url: string | null;
+  /** subscriptionPreview BE tự tính — FE dùng để hiển thị */
+  subscriptionPreview: SubscriptionPreviewDto;
 
-  tutorial_video_url: string | null;
-  sale_kit_url: string | null;
-  user_guide_link: string | null;
+  createdAt: string;
+  updatedAt: string;
 
   /**
-   * ⭐ NEW FIELD: success_stories
-   * FE nhận mảng gồm 0..n câu chuyện học sinh đã thành công.
+   * Backward compatibility (nếu BE cũ vẫn trả snake_case)
+   * Có thể loại bỏ dần.
    */
-  success_stories: BMProductSuccessStoryDto[] | null;
-
-  grade: number | null;      // Lớp 1–12
-  level: number | null;      // Cơ bản / Nâng cao / Chuyên
-  category: string | null;   // Tự do
-  subject: string | null;    // Toán, Anh, Lý,...
-
-  price_amount: number | null;
-  list_price_amount: number | null;
-  price_currency: string | null;
-
-  promotion_flag: boolean | null;
-  promotion_note: string | null;
-
-  sale_start_at: string | null;  // FE chỉ cần ISO string
-  sale_end_at: string | null;
-  access_start_at: string | null;
-  access_end_at: string | null;
-
-  access_duration_days: number | null;
-
-  status: number;
-  is_visible: boolean;
-  display_order: number | null;
-
-  target_student_desc: string | null;
-  learning_outcome: string | null;
-
-  metadata: any | null;
-
-  created_at: string | null;
-  created_by: string | null;
-  updated_at: string | null;
-  updated_by: string | null;
+  product_title?: string;
+  product_code?: string;
+  product_name?: string;
+  sale_kit?: any;
+  sale_terms?: any;
 }
 
 /**
- * Danh sách khóa học.
+ * ============================
+ * LIST ITEM DTO
+ * ============================
  */
-export type BMProductDtoList = BMProductDto[];
+export interface BMProductListItemDto {
+  productId: number;
+  productCode: string;
+  productName: string;
+  productType: string;
+  price: number;
+  currency: string;
+  isActive: boolean;
+}

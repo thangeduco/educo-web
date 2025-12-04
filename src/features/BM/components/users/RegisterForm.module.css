@@ -1,0 +1,268 @@
+.formWrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===== TITLE & DESCRIPTION ===== */
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #1d02c7;
+  margin: 0 0 4px;
+  text-align: left;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin: 0 0 6px;
+  text-align: left;
+}
+
+.requiredNote {
+  font-size: 0.8rem;
+  color: #b91c1c;
+  margin: 0 0 10px;
+  text-align: left;
+}
+
+/* ===== ERROR ===== */
+
+.error {
+  font-size: 0.85rem;
+  color: #b91c1c;
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+/* ===== FORM ROOT ===== */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ===== KHUNG TRÊN: THÔNG TIN TÀI KHOẢN ===== */
+
+.topFrame {
+  margin-top: 6px;
+  border-radius: 14px;
+  border: 1px dashed #bfdbfe;  /* viền xanh nhạt */
+  background: #b2dde3;         /* nền xanh nước biển rất nhạt */
+  padding: 10px 12px 12px;
+  box-sizing: border-box;
+}
+
+.topFrameTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #3012ef; /* xanh đậm hơn cho tiêu đề */
+  margin-bottom: 8px;
+}
+
+/* ===== PHẦN TRÊN: 3 HÀNG (EMAIL, PASSWORD) BÊN TRONG KHUNG ===== */
+
+.topSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ===== LABEL ===== */
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a2b26;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.requiredMark {
+  color: #dc2626;
+  font-weight: 800;
+}
+
+.optionalHint {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+/* ===== INPUTS ===== */
+
+.input,
+.inputRequired {
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  outline: none;
+  background: #f9fafb;
+  color: #111827;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.input::placeholder,
+.inputRequired::placeholder {
+  color: #9ca3af;
+}
+
+.input:focus,
+.inputRequired:focus {
+  background: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+}
+
+/* Trường bắt buộc highlight mạnh hơn (giữ lại để tái sử dụng nếu cần) */
+
+.inputRequired {
+  border-width: 2px;
+  border-color: #dc2626;
+  background: #fff8f8;
+}
+
+.inputRequired::placeholder {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+/* ===== FILE INPUT ===== */
+
+.inputFile {
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  background: #ffffff;
+  color: #111827;
+  box-sizing: border-box;
+}
+
+/* ===== KHUNG DƯỚI: THÔNG TIN CÁ NHÂN ===== */
+
+.bottomFrame {
+  margin-top: 6px;
+  border-radius: 14px;
+  border: 1px dashed #d1d5db;
+  background: #efd3ac;
+  padding: 10px 12px 12px;
+  box-sizing: border-box;
+}
+
+.bottomFrameTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #3012ef;
+  margin-bottom: 8px;
+}
+
+/* Grid 2 cột bên trong khung thông tin cá nhân */
+
+.twoColumnGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 18px;
+}
+
+/* Họ và tên span cả 2 cột để input kéo rộng hết ngang
+   -> bên trái thẳng với Ảnh đại diện, bên phải thẳng với Slogan */
+.fullNameField {
+  grid-column: 1 / -1;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ===== RADIO ===== */
+
+.radioRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+
+.radioLabel {
+  font-size: 0.85rem;
+  color: #374151;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.radioLabel input[type='radio'] {
+  transform: scale(1.1);
+  accent-color: #2563eb;
+}
+
+/* ===== ACTIONS ===== */
+
+.actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submitButton {
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #f9fafb;
+  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.35);
+  transition: background 0.15s ease, transform 0.1s ease,
+    box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.submitButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(22, 163, 74, 0.5);
+  filter: brightness(1.03);
+}
+
+.submitButton:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 640px) {
+  .twoColumnGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .submitButton {
+    width: 100%;
+  }
+}

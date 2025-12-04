@@ -39,7 +39,7 @@
 /* HERO */
 
 .heroHeader {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .breadcrumb {
@@ -54,7 +54,7 @@
 }
 
 .sectionHeader {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 800;
   color: #dc2626;
   margin-bottom: 8px;
@@ -80,7 +80,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .metaItem {
@@ -88,147 +88,191 @@
   color: #4b5563;
 }
 
-/* ===== PREVIEW GRID (4 BLOCK CHÍNH) ===== */
-
-.previewGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-  align-items: stretch;
-  margin-bottom: 24px;
+.metaItemError {
+  font-size: 0.92rem;
+  color: #b91c1c;
 }
 
-.previewItem {
-  background: #f9fafb;
-  border-radius: 16px;
-  padding: 14px 14px 16px;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+/* ===== GENERIC SECTION BLOCK (SALE KIT) ===== */
+
+.sectionBlock {
+  background: radial-gradient(
+    circle at top left,
+    #fee2e2 0,
+    #f9fafb 45%,
+    #eef2ff 100%
+  );
+  border-radius: 18px;
+  padding: 16px 16px 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
   box-sizing: border-box;
-  height: 100%;
 }
 
-.previewTitle {
-  font-size: 1.05rem;
+.sectionLabel {
+  font-size: 0.85rem;
   font-weight: 700;
-  color: #111827;
-  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #b91c1c;
+  margin-bottom: 8px;
 }
 
-.previewText {
-  font-size: 0.95rem;
-  color: #4b5563;
-  line-height: 1.5;
-  margin: 0 0 6px;
+.sectionInner {
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
 }
 
-/* ===== MEDIA BLOCKS – 16:9 ===== */
-
-.imageWrapper,
-.videoWrapper {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 12px;
+.sectionImage {
+  flex: 0 0 38%;
+  max-width: 38%;
+  border-radius: 16px;
   overflow: hidden;
   background: #f3f4f6;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
-  flex-shrink: 0;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.16);
 }
 
-.previewImage {
-  position: absolute;
-  inset: 0;
+.sectionImageTag {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.videoWrapper iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
+.sectionText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-/* VIDEO SECTION RIÊNG BÊN DƯỚI */
+/* TITLE HIGHLIGHT */
 
-.videoSection {
-  margin-top: 8px;
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #111827;
+  margin: 0 0 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #fee2e2, #fffbeb);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
-/* LINK HƯỚNG DẪN SỬ DỤNG */
+.sectionTitle::before {
+  content: "★";
+  font-size: 0.9rem;
+  color: #dc2626;
+}
 
-.usageLink {
-  margin-top: 4px;
+/* HIGHLIGHTS LIST */
+
+.highlightList {
+  list-style: none;
+  margin: 4px 0 10px;
+  padding: 0;
+}
+
+.highlightItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
+  margin-bottom: 6px;
+}
+
+.highlightBullet {
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.highlightText {
   font-size: 0.95rem;
+  color: #111827;
+  line-height: 1.5;
+}
+
+/* INSPIRATIONAL QUOTE */
+
+.inspirationalQuote {
+  margin: 6px 0 4px;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #374151;
+  padding-left: 10px;
+  border-left: 3px solid #f97316;
+}
+
+/* GUIDE LINKS */
+
+.guideLink {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
   color: #2563eb;
   text-decoration: none;
-  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.usageLink:hover {
+.guideLink::after {
+  content: "↗";
+  font-size: 0.8rem;
+}
+
+.guideLink:hover {
   text-decoration: underline;
 }
 
-/* ===== STORY SECTION – CÂU CHUYỆN THÀNH QUẢ ===== */
+/* ===== STORIES SECTION ===== */
 
-.storySection {
-  margin-top: 24px;
-  padding: 18px 14px 12px;
-  border-radius: 16px;
-  background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+.storiesSection {
+  margin-top: 4px;
 }
 
-.storySectionTitle {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #111827;
-  margin: 0 0 6px;
-}
-
-.storySectionDesc {
+.storiesIntro {
   font-size: 0.95rem;
   color: #4b5563;
   line-height: 1.6;
-  margin: 0 0 16px;
+  margin: 0 0 12px;
 }
 
-/* Mỗi hàng gồm 2 học sinh (wrap trên mobile) */
-
-.storyRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 14px;
+.storiesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .storyCard {
-  flex: 1 1 260px;
-  min-width: 0;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
   background: #ffffff;
   border-radius: 16px;
   padding: 10px 12px;
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
   box-sizing: border-box;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
 .storyCard:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
 }
 
 .storyAvatarWrapper {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   border-radius: 999px;
   overflow: hidden;
   flex-shrink: 0;
@@ -241,8 +285,6 @@
   height: 100%;
   object-fit: cover;
 }
-
-/* BODY: TITLE + STORY */
 
 .storyBody {
   flex: 1;
@@ -257,13 +299,53 @@
   font-weight: 700;
   color: #111827;
   margin: 0;
+  padding-bottom: 2px;
+  border-bottom: 2px solid #fee2e2;
 }
 
-.storyText {
+.storyContent {
   font-size: 0.9rem;
   color: #374151;
   line-height: 1.5;
   margin: 0;
+}
+
+/* ===== VIDEO SECTION (nếu dùng) ===== */
+
+.videoSection {
+  margin-top: 22px;
+}
+
+.videoTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 4px;
+}
+
+.videoText {
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0 0 10px;
+}
+
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #111827;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.4);
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 /* ===== STICKY BOTTOM BAR ===== */
@@ -274,8 +356,8 @@
   right: 0;
   bottom: 0;
   height: var(--bottom-bar-height);
-  background: rgba(17, 24, 39, 0.94);
-  box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.2);
+  background: rgba(224, 226, 204, 0.94);
+  box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.3);
   z-index: 50;
   display: flex;
   justify-content: center;
@@ -295,9 +377,9 @@
 }
 
 .bottomBarText {
-  color: #f9fafb;
+  color: #0810f0;
   font-size: 0.98rem;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .bottomBarActions {
@@ -311,13 +393,38 @@
 .trialButton,
 .registerButton {
   border-radius: 999px;
-  padding: 8px 18px;
-  font-size: 0.95rem;
-  font-weight: 600;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 700;
   border: none;
   cursor: pointer;
-  transition: all 0.15s ease;
   white-space: nowrap;
+  color: #ffffff;
+
+  /* ANIMATED GRADIENT BACKGROUND */
+  background: linear-gradient(120deg, #ef4444, #f97316, #ef4444);
+  background-size: 200% 200%;
+  animation: gradientMove 3s ease infinite;
+
+  /* TRANSITION FOR SCALE */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.registerButton:hover {
+  transform: scale(1.2);
+  box-shadow: 0 12px 28px rgba(220, 38, 38, 0.45);
 }
 
 .trialButton {
@@ -338,6 +445,74 @@
   background: #b91c1c;
 }
 
+/* ===== POPUP ĐĂNG NHẬP / ĐĂNG KÝ (giống HomePage) ===== */
+
+.loginModalBackdrop,
+.registerModalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loginModalContent,
+.registerModalContent {
+  width: 100%;
+  max-width: 640px; /* cùng kích thước với HomePage */
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.35);
+  padding: 0 0 20px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.loginModalHeader,
+.registerModalHeader {
+  background: #beefd3;
+  border-radius: 16px 16px 0 0;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.loginModalTitle,
+.registerModalTitle {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.loginModalCloseButton,
+.registerModalCloseButton {
+  border: none;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 999px;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.loginModalCloseButton:hover,
+.registerModalCloseButton:hover {
+  background: #b91c1c;
+  transform: scale(1.05);
+}
+
+.loginModalBody,
+.registerModalBody {
+  padding: 12px 16px 0;
+  box-sizing: border-box;
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 960px) {
@@ -350,7 +525,16 @@
     padding: 16px 14px 22px;
   }
 
-  .previewGrid {
+  .sectionInner {
+    flex-direction: column;
+  }
+
+  .sectionImage {
+    flex: 0 0 auto;
+    max-width: 100%;
+  }
+
+  .storiesGrid {
     grid-template-columns: 1fr;
   }
 
@@ -366,19 +550,11 @@
 
 @media (max-width: 640px) {
   .sectionHeader {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
   }
 
-  .previewTitle {
-    font-size: 1rem;
-  }
-
-  .storySection {
-    padding: 14px 10px;
-  }
-
-  .storyCard {
-    padding: 10px;
+  .sectionTitle {
+    font-size: 1.05rem;
   }
 
   .bottomBarInner {

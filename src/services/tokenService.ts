@@ -1,26 +1,25 @@
 // src/services/tokenService.ts
-import CryptoJS from 'crypto-js';
 
 const TOKEN_KEY = 'access_token';
-const SECRET = 'EDUCO_SECRET_KEY_123'; // Đặt ở .env nếu dùng production
 
+// Lưu token dạng plain string vào localStorage
 export const saveToken = (token: string) => {
-  const encrypted = CryptoJS.AES.encrypt(token, SECRET).toString();
-  localStorage.setItem(TOKEN_KEY, encrypted);
+  console.log('[tokenService] saveToken, length =', token?.length);
+  localStorage.setItem(TOKEN_KEY, token);
 };
 
+// Lấy token để gắn vào header Authorization
 export const getToken = (): string | null => {
-  const encrypted = localStorage.getItem(TOKEN_KEY);
-  if (!encrypted) return null;
-  try {
-    const bytes = CryptoJS.AES.decrypt(encrypted, SECRET);
-    return bytes.toString(CryptoJS.enc.Utf8);
-  } catch (e) {
-    console.error('[tokenService] Giải mã token lỗi:', e);
+  const token = localStorage.getItem(TOKEN_KEY);
+  if (!token) {
+    console.log('[tokenService] Không tìm thấy access_token trong localStorage');
     return null;
   }
+  console.log('[tokenService] getToken OK, length =', token.length);
+  return token;
 };
 
 export const removeToken = () => {
+  console.log('[tokenService] removeToken');
   localStorage.removeItem(TOKEN_KEY);
 };
